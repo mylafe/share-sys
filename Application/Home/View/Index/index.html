@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>书签同步系统</title>
+<link rel="icon" type="image/png" href="__PUBLIC__/img/toplogo.png"/>
+<link href="__PUBLIC__/css/amazeui.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/admin.css" rel="stylesheet">   
+<script src="__PUBLIC__/js/jquery-2.1.1.js"></script>
+<script src="__PUBLIC__/js/amazeui.min.js"></script>
+</head>
+<style type="text/css">
+    .btn-primary {
+        background-color: #286090;
+        border-color: #286090;
+    }
+</style>
+<script type="text/javascript">
+    function editClick(id,preTitle,preFenlei,preContent){
+        $("#tempId").val(id);
+        $("#editqianfen").val(preFenlei);
+        $("#edittitle").val(preTitle);
+        $("#editcontents").val(preContent);
+        $('#doc-modal-3').modal('open');
+    }
+</script>
+<body class="gray-bg">
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>以获得更好的体验！</p>
+<![endif]-->
+<header class="am-topbar admin-header">
+  <div class="am-topbar-brand">
+    <strong>书签管理</strong>/<small>系统</small>
+  </div>
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+      <li><a href="#" data-toggle="modal"><span id="login" class="am-icon-users" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">您好，{:session('username')}</span></a>
+      </li>            
+      <li><a href="#" data-toggle="modal"><i><spand class="am-icon-users" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">添加分类</spand></i></a>
+      </li>
+      <li><a href="#" data-toggle="modal"><i><spand class="am-icon-users" data-am-modal="{target: '#doc-modal-2'}">添加书签</spand></i></a>
+      </li>
+      <li><a href="{:U('changepwd/index')}"><i><spand class="am-icon-users" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">修改密码</spand></i></a>
+      </li>
+      <li><a href="{:U('Login/logout')}"><i><span class="am-icon-caret-down" data-am-modal="{'#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">退出系统</span></i></a>
+      </li>
+      <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="am-offcanvas-bar admin-offcanvas-bar">
+
+    
+      <!-- 书签分类模板 -->
+        <ul id="side-menu" class="am-list admin-sidebar-list">
+           
+            <volist name="typeArr2" id="vo">
+                <li>
+                  <a href="{:U('index/index',array('typeid'=>$vo["id"]))}"><i class="fa fa-tags"></i> <span class="am-icon-home">{$vo.name}</span></a>
+                 <!--  <a onclick="return(confirm('确定要删除吗？'))" href="{:U('home/index/delete',array('typeid'=>$vo["id"]))}" title="删除">删除</a> -->
+                </li>
+            </volist>
+        </ul>
+    </div>
+  </div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">内容</th><th class="table-date am-hide-sm-only">日期</th><th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+
+           <volist name="bookmarks" id="bo">
+                <tr>
+                    <td>{$bo.id}</td>
+                    <td>{$bo.title}</td>
+                    <td class="am-hide-sm-only"><a href="{$bo.contents}" target="_blank">{$bo.contents}</a></td>
+                    <td class="am-hide-sm-only">{$bo.time}</td>
+                    <td class="text-right mail-date">
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs">
+                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"><a href="javascript:editClick('{$bo.id}','{$bo.title}','{$bo.typeid}','{$bo.contents}')" title="编辑">编辑</a></span></button>
+                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"><a onclick="return(confirm('确定要删除吗？'))" href="{:U('home/index/delete',array('id'=>$bo["id"]))}" title="删除">删除</a></span></button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </volist>
+           
+          </tbody>
+        </table>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+        
+<!-- 添加分类 -->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">添加分类
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <form action="/home/index/type" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" id="name" placeholder="类别" required="">
+            </div>
+             <button type="submit" id="insert0" class="btn btn-primary block full-width m-b">添加</button>
+             </form>
+    </div>
+  </div>
+</div>
+
+<!-- 添加书签 -->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">添加书签
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <form action="/home/index/biaoqian" method="post">
+    <div class="form-group">
+                <input type="text" class="form-control" name="title" id="title" placeholder="标题" required="">
+
+                <label></label>
+                    <select id="qianfen" name="typeid">
+                      <!-- <option>=未分类=</option>
+                      <option value="1">学习</option>
+                      <option value="2">阅读</option>
+                      <option value="3">管理</option>
+                      <option value="4">工具</option>
+                      <option value="5">娱乐</option>
+                      <option value="6">论坛</option> -->
+                    
+                    <option>=未分类=</option>
+                    <volist name="typeArr2" id="vo">
+                        <li>
+                            <option value="{$vo.id}">{$vo.name}</option>
+                        </li>
+                    </volist>
+                    </select>
+                <input type="text" class="form-control" name="contents" id="contents" placeholder="内容" required="">
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">添加</button>
+            </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- 编辑书签 -->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-3">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">编辑书签
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <form action="/home/index/update" method="post">
+    <div class="form-group">
+                <input type="text" class="form-control" name="id" id="tempId" required="" style="display:none" readonly>
+                <input type="text" class="form-control" name="title" id="edittitle" placeholder="标题" required="">
+
+                <label></label>
+                    <select id="editqianfen" name="typeid" class="form-control m-b" data-style="btn-primary" data-width="auto">
+
+                    <option>=未分类=</option>
+                    <volist name="typeArr2" id="vo">
+                        <li>
+                            <option value="{$vo.id}">{$vo.name}</option>
+                        </li>
+                    </volist>
+                    </select>
+                <input type="text" class="form-control" name="contents" id="editcontents" placeholder="内容" required="">
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">修改</button>
+            </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <hr>
+  <p class="am-padding-left">© 2016 书签管理系统</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="__PUBLIC__/js/jquery.min.js"></script>
+<script src="__PUBLIC__/js/amazeui.min.js"></script>
+<!--<![endif]-->
+<script src="__PUBLIC__/js/app.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+[ 2016-01-27T09:59:22+08:00 ] 127.0.0.1 /home
+ERR: 无法加载控制器:Index
+
+[ 2016-01-27T10:43:13+08:00 ] 127.0.0.1 /home/login/login
+ERR: 非法操作:login
+
+[ 2016-01-27T12:51:43+08:00 ] 127.0.0.1 /index.php/Home/register/index.html
+ERR: 无法加载控制器:Register
+
