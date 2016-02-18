@@ -4,3 +4,9 @@ ERR: 非法操作:login
 [ 2016-02-17T13:06:41+08:00 ] 127.0.0.1 /index.php/Home/register/index.html
 ERR: 无法加载控制器:Register
 
+[ 2016-02-17T17:04:29+08:00 ] 127.0.0.1 /
+ERR: 无法加载控制器:Index
+
+[ 2016-02-17T17:05:35+08:00 ] 127.0.0.1 /index.php/Home/register/index.html
+ERR: 无法加载控制器:Register
+
