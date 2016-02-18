@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>书签同步系统</title>
+<meta name="keywords" content="作品展示,个人分享"/>
+<meta name="description" content="个人文章博客分享" />
+<title>作品分享系统</title>
 <link rel="icon" type="image/png" href="__PUBLIC__/img/toplogo.png"/>
 <link href="__PUBLIC__/css/amazeui.min.css" rel="stylesheet">
 <link href="__PUBLIC__/css/admin.css" rel="stylesheet">   
@@ -31,7 +33,7 @@
 <![endif]-->
 <header class="am-topbar admin-header">
   <div class="am-topbar-brand">
-    <strong>书签管理</strong>/<small>系统</small>
+    <strong>作品分享</strong>/<small>系统</small>
   </div>
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
 
@@ -68,6 +70,7 @@
                  <!--  <a onclick="return(confirm('确定要删除吗？'))" href="{:U('home/index/delete',array('typeid'=>$vo["id"]))}" title="删除">删除</a> -->
                 </li>
             </volist>
+            <li>首页</li>
         </ul>
     </div>
   </div>
@@ -201,7 +204,7 @@
 
 <footer>
   <hr>
-  <p class="am-padding-left">© 2016 书签管理系统</p>
+  <p class="am-padding-left">© 2016 作品分享系统</p>
 </footer>
 
 <!--[if lt IE 9]>
