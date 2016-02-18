@@ -4,7 +4,6 @@ use Think\Controller;
 /**
  * 通用控制器
  * 主要用于验证是否登陆 以及 用户权限
- * @package Home\Controller
  */
 class CommonController extends Controller {
     /* 定义用户id */
@@ -18,7 +17,8 @@ class CommonController extends Controller {
         if (session('userid')) {
             $this->userid = session('userid');
         } else {
-            $this->error('您还没有登录,正跳转至登录面...', U('login/index'));
+            //$this->error('<h1 style="text-align:center; font-size: 50px; font-weight: normal;">-_-!</h1><br>对不起,您还没有登录,正跳转至登录面', U('login/index'));
+            redirect(U('login/index'), 3, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">-_-!<br>对不起,您还没有登录,正跳转至登录面...</h1>');
         }
     }
 

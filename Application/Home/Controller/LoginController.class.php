@@ -51,9 +51,7 @@ class LoginController extends Controller {
     {
         // 清除所有session
         session(null);
-        redirect(U('login/index'), 2, '^O^ 正在安全退出...');
+        redirect(U('login/index'), 2, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">^O^ <br>正在安全退出</h1>');
     }
-
-
 
 }

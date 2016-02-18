@@ -23,6 +23,6 @@ class UserModel extends Model {
      */
     protected $_auto = array (
         array('password', 'sha1', 3, 'function') , // 对password字段在新增和编辑的时候使sha1函数处理
-        array('lasttime', 'time', 3, 'function'), // 对lasttime字段在新增的时候写入当前时间戳
+        array('lasttime', 'time', 1, 'function'), // 对lasttime字段在新增的时候写入当前时间戳
     );
 }
