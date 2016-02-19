@@ -13,9 +13,13 @@ class LoginController extends Controller {
         // 判断提交方式
         if (IS_POST) {
             // 实例化Login对象
-            $login = D('user');
+            $login = M('user');
 
             // 自动验证 创建数据集
+            $data['userid']= $_POST['userid'];
+            $data['password']= $_POST['password'];
+            $data['lasttime']= time();
+
             if (!$data = $login->create()) {
                 // 防止输出中文乱码
                 header("Content-type: text/html; charset=utf-8");
