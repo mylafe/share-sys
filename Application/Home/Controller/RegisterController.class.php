@@ -13,7 +13,12 @@ class RegisterController extends Controller {
         // 判断提交方式 做不同处理
         if (IS_POST) {
             // 实例化User对象
-            $user = D('user');
+            $user = M('user');
+            $data['userid']= $_POST['userid'];
+            $data['password']= sha1($_POST['password']);
+            $data['userid']= $_POST['userid'];
+            
+
             // 自动验证 创建数据集
             if (!$data = $user->create()) {
                 // 防止输出中文乱码
@@ -21,6 +26,8 @@ class RegisterController extends Controller {
                 exit($user->getError());
             }
             //\Think\Log::record('11111111111111111'.json_encode($data),'ALERT');//调试
+
+            $data['uuid']= $this->create_guid();//uuid赋值
 
             //插入数据库
             if ($id = $user->add($data)) {
@@ -32,6 +39,30 @@ class RegisterController extends Controller {
             $this->display();
         }
     }
+    public function create_guid($namespace = '') {     
+    static $guid = '';
+    $uid = uniqid("", true);
+    $data = $namespace;
+    $data .= $_SERVER['REQUEST_TIME'];
+    $data .= $_SERVER['HTTP_USER_AGENT'];
+    $data .= $_SERVER['LOCAL_ADDR'];
+    $data .= $_SERVER['LOCAL_PORT'];
+    $data .= $_SERVER['REMOTE_ADDR'];
+    $data .= $_SERVER['REMOTE_PORT'];
+    $hash = strtoupper(hash('ripemd128', $uid . $guid . md5($data)));
+    $guid = '{' .   
+            substr($hash,  0,  8) . 
+            '-' .
+            substr($hash,  8,  4) .
+            '-' .
+            substr($hash, 12,  4) .
+            '-' .
+            substr($hash, 16,  4) .
+            '-' .
+            substr($hash, 20, 12) .
+            '}';
+    return $guid;
+  }
     
 
 }
