@@ -13,8 +13,9 @@ class RegisterController extends Controller {
         // 判断提交方式 做不同处理
         if (IS_POST) {
             // 实例化User对象
-            $user = M('user');
+            $user = D('user');
             $data['userid']= $_POST['userid'];
+            $data['username']= $_POST['username'];
             $data['password']= sha1($_POST['password']);
             $data['userid']= $_POST['userid'];
             
@@ -39,7 +40,7 @@ class RegisterController extends Controller {
             $this->display();
         }
     }
-    public function create_guid($namespace = '') {     
+    public function create_guid($namespace = '') {
     static $guid = '';
     $uid = uniqid("", true);
     $data = $namespace;

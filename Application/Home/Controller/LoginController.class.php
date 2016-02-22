@@ -13,11 +13,11 @@ class LoginController extends Controller {
         // 判断提交方式
         if (IS_POST) {
             // 实例化Login对象
-            $login = M('user');
+            $login = D('user');
 
             // 自动验证 创建数据集
-            $data['userid']= $_POST['userid'];
-            $data['password']= sha1($_POST['password']);
+            //$data['userid']= $_POST['userid'];
+            //$data['password']= sha1($_POST['password']);
             // $data['lasttime']= time();
             
 
@@ -41,6 +41,7 @@ class LoginController extends Controller {
                 session('username', $res['username']);   // 当前用户名
 
                 $this->success('登录成功,正跳转至系统首页...', U('/'));
+                
                  $login->where("userid = {$res['userid']}")->setField('lasttime',time());//更新最后登录时间
             } else {
                  $this->error('登录失败,用户名或密码不正确!');
