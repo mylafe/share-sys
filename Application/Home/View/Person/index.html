@@ -38,21 +38,15 @@
     .clear{
       clear: both;
     }
-    .am-fl {
-    float: right;
+    .admin-header{
+      background-color: #0E90D2;
+      color: #fff;
     }
   </style>
 
 </head>
 
 <body class="gray-bg">
-    <div class="header" style="background-color:rgb(14,144,210);">
-    <h1 data-am-scrollspy="{animation:'slide-top', delay: 500}"
-                            class="am-scrollspy-init am-scrollspy-inview am-animation-slide-top" style=" padding-bottom:10px;">个人中心</h1>
-</div>
-
-    <div class="am-g">
-        <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
             <!-- <form action="/home/person/person" method="post" class="am-form" id="myform">
                 <div>
                     <input type="text" class="form-control" name="username" id="username" placeholder="昵称" required="">
@@ -73,7 +67,134 @@
                 <button type="submit" id="submit" class="am-btn am-btn-primary am-btn-sm am-fl">修改</button>
             </form> -->
 
-            <ul id="side-menu" class="am-list admin-sidebar-list">
+    <!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>以获得更好的体验！</p>
+<![endif]-->
+<header class="am-topbar admin-header">
+  <div class="am-topbar-brand">
+    <strong>作品分享</strong>
+  </div>
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+      <li><a href="{:U('person/index')}" data-toggle="modal"><span id="login" class="am-icon-users" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">您好，{:session('username')}</span></a>
+      </li>
+      <li><a><span data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">上次登录时间:{:session('lasttime')}</span></a>
+      </li>         
+      <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+    </ul>
+  </div>
+</header>
+
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="am-offcanvas-bar admin-offcanvas-bar">
+      <ul id="side-menu" class="am-list admin-sidebar-list">
+          <li><a href="{:U('index/index')}"><span class="am-icon-home"></span>首页</a></li>
+          <li><a href="#" data-toggle="modal"><i><spand class="am-icon-file" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">发表文章</spand></i></a>
+          </li>
+          <li><a href="#" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">技术讨论</spand></i></a>
+          </li>
+          <li><a href="{:U('changepwd/index')}"><i><spand class="am-icon-pencil-square-o" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">修改密码</spand></i></a>
+          </li>
+          <li><a href="{:U('Login/logout')}"><i><span class="am-icon-sign-out" data-am-modal="{'#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">退出系统</span></i></a>
+          </li>
+      </ul>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p><span class="am-icon-bookmark"></span> 公告</p>
+          <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
+        </div>
+      </div>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p><span class="am-icon-tag"></span> wiki</p>
+          <p>Welcome to the Amaze UI wiki!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal information</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+        <div class="am-panel am-panel-default">
+          <div class="am-panel-bd">
+            <div class="am-g">
+              <div class="am-u-md-4">
+                <img class="am-img-circle am-img-thumbnail" src="__PUBLIC__/img/toplogo.png" alt=""/>
+              </div>
+              <div class="am-u-md-8">
+                <p>本地上传头像</p>
+                <form class="am-form">
+                  <div class="am-form-group">
+                    <input type="file" id="user-pic">
+                    <p class="am-form-help">请选择要上传的文件...</p>
+                    <button type="button" class="am-btn am-btn-primary am-btn-xs">保存头像</button>
+                  </div>
+                </form>
+                <form action="__URL__/upload" enctype="multipart/form-data" method="post" >
+                    <input type="text" name="name" />
+                    <input type="file" name="photo" />
+                    <input type="submit" value="提交" >
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal">
+
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">昵称</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="username" placeholder="昵称">
+              <!-- <small>输入新昵称</small> -->
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="user-sexy" class="am-u-sm-3 am-form-label">性别</label>
+            <div class="am-u-sm-9">
+               <label>
+                <input type="radio" name="sexy" value="option0" checked>
+                男
+                </label>
+               <label>
+                <input type="radio" name="sexy" value="option1" checked>
+                女
+              </label>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="user-phone" class="am-u-sm-3 am-form-label">生日</label>
+            <div class="am-u-sm-9">
+              <input type="date" id="birthday" placeholder="生日 / Telephone">
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <button type="button" class="am-btn am-btn-primary">保存修改</button>
+            </div>
+          </div>
+        </form>
+        <ul id="side-menu" class="am-list admin-sidebar-list">
                 <volist name="userinfo" id="vo">
                     <li>
                       <i class="fa fa-tags">账号：</i> <span class="nav-label">{$vo.userid}</span></a>
@@ -89,9 +210,33 @@
                     </li>
                 </volist>
             </ul>
-
-        </div>
+      </div>
     </div>
+  </div>
+  <!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+  <hr>
+  <p class="am-padding-left">© 2016 作品分享系统</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/amazeui.min.js"></script>
+
+<script src="assets/js/app.js"></script>
+</body>
 
     
 
