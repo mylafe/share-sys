@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>个人中心</title>
+    
+    <link rel="icon" type="image/png" href="__PUBLIC__/img/toplogo.png"/>
+    <link href="__PUBLIC__/css/amazeui.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/admin.css" rel="stylesheet">
+
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/style.css" rel="stylesheet">
+
+    
+    <script src="__PUBLIC__/js/jquery-2.1.1.js"></script>
+    <script src="__PUBLIC__/js/amazeui.min.js"></script>
+    <style>
+    .header {
+      padding-top: 80px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 200%;
+      color: #fff;
+      margin-top: 30px;
+    }
+    .header p {
+      font-size: 14px;
+    }
+    .sub{
+      width: 100px;
+      float: right;
+    }
+    .clear{
+      clear: both;
+    }
+    .am-fl {
+    float: right;
+    }
+  </style>
+
+</head>
+
+<body class="gray-bg">
+    <div class="header" style="background-color:rgb(14,144,210);">
+    <h1 data-am-scrollspy="{animation:'slide-top', delay: 500}"
+                            class="am-scrollspy-init am-scrollspy-inview am-animation-slide-top" style=" padding-bottom:10px;">个人中心</h1>
+</div>
+
+    <div class="am-g">
+        <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+            <!-- <form action="/home/person/person" method="post" class="am-form" id="myform">
+                <div>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="昵称" required="">
+                </div>
+                <br>
+                <div>
+                    <input type="text" class="form-control" name="sexy" id="sexy" placeholder="性别" required="">
+                </div>
+                <br>
+                <div>
+                    <input type="text" class="form-control" name="birthday" id="birthday" placeholder="生日" required="">
+                </div>
+                <br>
+                <div>
+                    <input type="text" class="form-control" name="pictuer" id="pictuer" placeholder="头像" required="">
+                </div>
+                <br>
+                <button type="submit" id="submit" class="am-btn am-btn-primary am-btn-sm am-fl">修改</button>
+            </form> -->
+
+            <ul id="side-menu" class="am-list admin-sidebar-list">
+                <volist name="userinfo" id="vo">
+                    <li>
+                      <i class="fa fa-tags">账号：</i> <span class="nav-label">{$vo.userid}</span></a>
+                    </li>
+                    <li>
+                      <i class="fa fa-tags">昵称：</i> <span class="nav-label">{$vo.username}</span>
+                    </li>
+                    <li>
+                      <i class="fa fa-tags">最后登录时间：</i> <span class="nav-label">{$vo.lasttime}</span>
+                    </li>
+                    <li>
+                      <a href="{:U('changepwd/index')}"><i class="fa fa-tags">修改密码</i> <span class="nav-label"></span></a>
+                    </li>
+                </volist>
+            </ul>
+
+        </div>
+    </div>
+
+    
+
+</body>
+
+</html>

@@ -16,7 +16,6 @@
 			if($new_pwd != $re_pwd) {
 				$this->error('两次密码不一样！', U('changepwd/index'),3);
 			}
-			//\Think\Log::record('uuuuuuuuuuuuuu'. json_encode($_SESSION),'ALERT');//调试
 
 			$userid = $_SESSION['userid'];
 			$user = D("User")->where('userid='.$userid)->find();

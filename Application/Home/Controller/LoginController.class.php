@@ -30,7 +30,7 @@ class LoginController extends Controller {
             // 组合查询条件
             $where = array();
             $where['userid'] = $data['userid'];
-            $res = $login->where($where)->field('userid,username,password')->find();
+            $res = $login->where($where)->field('userid,username,password,lasttime')->find();
 
             // 验证用户名 对比 密码
            if ($res && $res['password'] == $data['password']) {
@@ -39,10 +39,11 @@ class LoginController extends Controller {
                 //\Think\Log::record('uuuuuuuuuuuuuu'.$res['userid']."dddddddn".$res['username'],'ALERT');//调试
                 session('userid', $res['userid']);          // 当前用户id
                 session('username', $res['username']);   // 当前用户名
+                session('lasttime', $res['lasttime']);   // 最后登录时间
 
                 $this->success('登录成功,正跳转至系统首页...', U('/'));
-                
-                 $login->where("userid = {$res['userid']}")->setField('lasttime',time());//更新最后登录时间
+
+                 $login->where("userid = {$res['userid']}")->setField('lasttime',date("Y-m-d H:i:s" ,time()));//更新最后登录时间
             } else {
                  $this->error('登录失败,用户名或密码不正确!');
             }
