@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>个人中心</title>
+    <title>发表文章</title>
     
     <link rel="icon" type="image/png" href="__PUBLIC__/img/toplogo.png"/>
     <link href="__PUBLIC__/css/amazeui.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@
 </head>
 
 <body class="gray-bg">
-
+        
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>以获得更好的体验！</p>
 <![endif]-->
@@ -73,10 +73,10 @@
   <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
     <div class="am-offcanvas-bar admin-offcanvas-bar">
       <ul id="side-menu" class="am-list admin-sidebar-list">
-          <li><a href="{:U('index/index')}"><span class="am-icon-home"></span>返回首页</a></li>
-          <li><a href="#" data-toggle="modal"><i><spand class="am-icon-file" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">查看文章</spand></i></a>
+          <li><a href="{:U('index/index')}"><span class="am-icon-home"></span>首页</a></li>
+          <li><a href="#" data-toggle="modal"><i><spand class="am-icon-file" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">发表文章</spand></i></a>
           </li>
-          <li><a href="{:U('person/index')}" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">个人资料</spand></i></a>
+          <li><a href="#" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">技术讨论</spand></i></a>
           </li>
           <li><a href="{:U('changepwd/index')}"><i><spand class="am-icon-pencil-square-o" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">修改密码</spand></i></a>
           </li>
@@ -103,77 +103,40 @@
   <!-- content start -->
   <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">发表文章</strong></div>
     </div>
 
     <hr/>
 
     <div class="am-g">
 
-      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-        <div class="am-panel am-panel-default">
-          <div class="am-panel-bd">
-            <div class="am-g">
-              <div class="am-u-md-4">
-                <img class="am-img-circle am-img-thumbnail" src="__PUBLIC__/img/toplogo.png" alt=""/>
-              </div>
-              <div class="am-u-md-8">
-                <p>本地上传头像</p>
-                <form class="am-form">
-                  <div class="am-form-group">
-                    <input type="file" id="user-pic">
-                    <p class="am-form-help">请选择要上传的文件...</p>
-                    <button type="button" class="am-btn am-btn-primary am-btn-xs">保存头像</button>
-                  </div>
-                </form>
-                <form action="__URL__/doedit" enctype="multipart/form-data" method="post" >
-                    <input type="text" name="name" />
-                    <input type="file" name="photo" />
-                    <input type="submit" value="提交" >
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-
       <volist name="userinfo" id="vo">
 
-        <form action="/home/person/personedit" method="post" class="am-form am-form-horizontal">
+        <form class="am-form am-form-horizontal">
+
           <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">昵称</label>
+            <label for="user-name" class="am-u-sm-3 am-form-label">标题</label>
             <div class="am-u-sm-9">
-              <input type="text" id="username" name="username" value="{$vo.username}">
-              <!-- <small>输入新昵称</small> -->
+              <input type="text" id="username" placeholder="标题">
             </div>
           </div>
 
-          <!-- <div class="am-form-group">
-            <label for="user-sexy" class="am-u-sm-3 am-form-label">性别</label>
+
+          <div class="am-form-group">
+            <label for="user-phone" class="am-u-sm-3 am-form-label">内容</label>
             <div class="am-u-sm-9">
-               <label>
-                <input type="radio" name="sexy" value="option0" checked>
-                男
-                </label>
-               <label>
-                <input type="radio" name="sexy" value="option1" checked>
-                女
-              </label>
+              <input type="text" id="birthday" placeholder="内容">
             </div>
           </div>
 
           <div class="am-form-group">
-            <label for="user-phone" class="am-u-sm-3 am-form-label">生日</label>
-            <div class="am-u-sm-9">
-              <input type="date" id="birthday" placeholder="生日">
-            </div>
-          </div> -->
+            <label for="doc-ta-1">内容</label>
+            <textarea class="" rows="5" id="doc-ta-1"></textarea>
+          </div>
 
           <div class="am-form-group">
             <div class="am-u-sm-9 am-u-sm-push-3">
-              <button type="submit" class="am-btn am-btn-primary">保存修改</button>
+              <button type="button" class="am-btn am-btn-primary">发布</button>
             </div>
           </div>
         </form>
@@ -189,6 +152,9 @@
                     </li>
                     <li>
                       <i class="fa fa-tags">最后登录时间：</i> <span class="nav-label">{$vo.lasttime}</span>
+                    </li>
+                    <li>
+                      <a href="{:U('changepwd/index')}"><i class="fa fa-tags">修改密码</i> <span class="nav-label"></span></a>
                     </li>
                 </volist>
         </ul> -->
@@ -216,6 +182,10 @@
 <script src="assets/js/amazeui.min.js"></script>
 
 <script src="assets/js/app.js"></script>
+</body>
+
+    
+
 </body>
 
 </html>

@@ -42,7 +42,14 @@
   <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-      <li><a href="{:U('person/index')}" data-toggle="modal"><span id="login" class="am-icon-users" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">您好，{:session('username')}</span></a>
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          <span class="am-icon-users"></span>您好，{:session('username')}<span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li><a href="{:U('person/index')}"><span class="am-icon-user"></span> 个人资料</a></li>
+          <li><a href="{:U('Login/logout')}"><span class="am-icon-power-off"></span> 退出系统</a></li>
+        </ul>
       </li>
       <li><a><span data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">上次登录时间:{:session('lasttime')}</span></a>
       </li>         
@@ -58,11 +65,9 @@
     <div class="am-offcanvas-bar admin-offcanvas-bar">
       <ul id="side-menu" class="am-list admin-sidebar-list">
           <li><a href="{:U('index/index')}"><span class="am-icon-home"></span>首页</a></li>
-          <li><a href="#" data-toggle="modal"><i><spand class="am-icon-file" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">发表文章</spand></i></a>
+          <li><a href="{:U('article/index')}"><i><spand class="am-icon-file">发表文章</spand></i></a>
           </li>
           <li><a href="#" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">技术讨论</spand></i></a>
-          </li>
-          <li><a href="{:U('changepwd/index')}"><i><spand class="am-icon-pencil-square-o" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">修改密码</spand></i></a>
           </li>
           <li><a href="{:U('Login/logout')}"><i><span class="am-icon-sign-out" data-am-modal="{'#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">退出系统</span></i></a>
           </li>
@@ -147,23 +152,6 @@
   <!-- content end -->
 </div>
         
-<!-- 添加分类 -->
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
-  <div class="am-modal-dialog">
-    <div class="am-modal-hd">发表文章
-      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-    </div>
-    <div class="am-modal-bd">
-      <form action="/home/index/type" method="post">
-            <div class="form-group">
-                <input type="text" class="form-control" name="name" id="name" placeholder="类别" required="">
-            </div>
-             <button type="submit" id="insert0" class="btn btn-primary block full-width m-b">添加</button>
-             </form>
-    </div>
-  </div>
-</div>
-
 <!-- 添加书签 -->
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
   <div class="am-modal-dialog">

@@ -18,6 +18,9 @@ class RegisterController extends Controller {
             $data['username']= $_POST['username'];
             $data['password']= sha1($_POST['password']);
             $data['userid']= $_POST['userid'];
+            // if($_POST['uerid'] == '' || $_POST['username'] == '' || $_POST['password'] == ''|| $_POST['userid'] == ''){
+            // $this->error("都填写了吗？仔细检查");
+            // }
             
 
             // 自动验证 创建数据集

@@ -18,10 +18,18 @@ return array(
  	//'URL_ROUTER_ON'   => true, //开启路由
 	'LOG_LEVEL' =>'EMERG,ALERT,CRIT,ERR', // 只记录EMERG ALERT CRIT ERR 错误
 
+
+	'URL_ROUTER_ON' => true,// 开启路由
+	'URL_ROUTE_RULES'=>array(
+	'news/:year/:month/:day' => array('News/archive', 'status=1'),
+	'news/:id' => 'News/read',
+	'news/read/:id' => '/news/:1',
+	),
+
 	'SESSION_OPTIONS'         =>  array(
     'name'                =>  'shareSESSION',	               //设置session名
     'expire'              =>  24*3600*30,                      //SESSION保存30天
     'use_trans_sid'       =>  1,                               //跨页传递
     'use_only_cookies'    =>  0,                               //是否只开启基于cookies的session的会话方式
-    	),
+    ),
 );
