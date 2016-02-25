@@ -15,7 +15,6 @@
     <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
     <link href="__PUBLIC__/css/style.css" rel="stylesheet">
 
-    
     <script src="__PUBLIC__/js/jquery-2.1.1.js"></script>
     <script src="__PUBLIC__/js/amazeui.min.js"></script>
     <style>
@@ -78,8 +77,8 @@
           </li>
           <li><a href="#" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">技术讨论</spand></i></a>
           </li>
-          <li><a href="{:U('changepwd/index')}"><i><spand class="am-icon-pencil-square-o" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">修改密码</spand></i></a>
-          </li>
+          <!-- <li><a href="{:U('changepwd/index')}"><i><spand class="am-icon-pencil-square-o" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">修改密码</spand></i></a>
+          </li> -->
           <li><a href="{:U('Login/logout')}"><i><span class="am-icon-sign-out" data-am-modal="{'#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">退出系统</span></i></a>
           </li>
       </ul>
@@ -109,56 +108,24 @@
     <hr/>
 
     <div class="am-g">
-
-      <volist name="userinfo" id="vo">
-
-        <form class="am-form am-form-horizontal">
-
-          <div class="am-form-group">
-            <label for="user-name" class="am-u-sm-3 am-form-label">标题</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="username" placeholder="标题">
-            </div>
+      <form class="am-form am-form-horizontal" action="__URL__/doaddarticle" method="post" enctype= "multipart/form-data">
+          <div class="form-group" ><label class="col-sm-2 control-label">标题：</label>
+              <div class="col-sm-10"><input type="text" class="form-control" name = "title" required="" id = "title"></div>
+          </div>
+  
+          <div class="form-group"><label class="col-sm-2 control-label">图片：<span style = "color:red;">必须</span></label>
+              <div class="col-sm-10"><input type="file" value="" name= "pic" required=""></div>
           </div>
 
-
-          <div class="am-form-group">
-            <label for="user-phone" class="am-u-sm-3 am-form-label">内容</label>
-            <div class="am-u-sm-9">
-              <input type="text" id="birthday" placeholder="内容">
-            </div>
+          <link href="__PUBLIC__/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+          <script type="text/plain" name="contents" id="myEditor" style="width:100%;height:510px;">
+          <p>{:session('username')}发表的文章</p>
+          </script>
+          <div class="mail-body text-center tooltip-demo">
+              <button  class="am-btn am-btn-primary am-btn-sm am-fl" id = "adds" type="submit"> 发布</button>
           </div>
-
-          <div class="am-form-group">
-            <label for="doc-ta-1">内容</label>
-            <textarea class="" rows="5" id="doc-ta-1"></textarea>
-          </div>
-
-          <div class="am-form-group">
-            <div class="am-u-sm-9 am-u-sm-push-3">
-              <button type="button" class="am-btn am-btn-primary">发布</button>
-            </div>
-          </div>
-        </form>
-
-        </volist>
-        <!-- <ul id="side-menu" class="am-list admin-sidebar-list">
-                <volist name="userinfo" id="vo">
-                    <li>
-                      <i class="fa fa-tags">账号：</i> <span class="nav-label">{$vo.userid}</span></a>
-                    </li>
-                    <li>
-                      <i class="fa fa-tags">昵称：</i> <span class="nav-label">{$vo.username}</span>
-                    </li>
-                    <li>
-                      <i class="fa fa-tags">最后登录时间：</i> <span class="nav-label">{$vo.lasttime}</span>
-                    </li>
-                    <li>
-                      <a href="{:U('changepwd/index')}"><i class="fa fa-tags">修改密码</i> <span class="nav-label"></span></a>
-                    </li>
-                </volist>
-        </ul> -->
-      </div>
+          <div class="clearfix"></div>
+      </form>
     </div>
   </div>
   <!-- content end -->
@@ -182,10 +149,46 @@
 <script src="assets/js/amazeui.min.js"></script>
 
 <script src="assets/js/app.js"></script>
+
+<!-- 调用脚部文件 -->
+<script type="text/javascript" src="__PUBLIC__/umeditor/third-party/jquery.min.js"></script>
+<script src="__PUBLIC__/js/inspinia.js"></script>
+<include file="Public/homefooter" />
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/umeditor/lang/zh-cn/zh-cn.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script>
+    $(function(){
+        var um = UM.getEditor('myEditor');
+    })
+</script>
+<script>
+    function change(s){
+        a=$(s).find("option:selected").attr("type");
+        if(a ==2){
+            $("#biaoqian").css("display","none");
+            $("#pingfen").css("display","none");
+            $("#mp3").css("display","block");
+            $("#pic2").css("display","none");
+        }else if(a==3){
+            $("#biaoqian").css("display","block");
+            $("#pingfen").css("display","block");
+            $("#mp3").css("display","none");
+            $("#pic2").css("display","none");
+        }else if(a==4){
+            $("#biaoqian").css("display","none");
+            $("#pingfen").css("display","none");
+            $("#mp3").css("display","none");
+            $("#pic2").css("display","none");
+        }else{
+            $("#biaoqian").css("display","none");
+            $("#pingfen").css("display","none");
+            $("#mp3").css("display","none");
+            $("#pic2").css("display","none");
+        }
+    }
+</script>
 </body>
-
-    
-
-</body>
-
 </html>
