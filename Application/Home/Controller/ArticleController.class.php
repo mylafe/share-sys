@@ -19,22 +19,22 @@
 		// 判断提交方式 做不同处理
         if (IS_POST) {
             // 实例化User对象
-            $words = D('words');
+            $works = D('works');
             $data['title']= $_POST['title'];
             $data['contents']= $_POST['contents'];
             
 
             // 自动验证 创建数据集
-            if (!$data = $words->create()) {
+            if (!$data = $works->create()) {
                 // 防止输出中文乱码
                 header("Content-type: text/html; charset=utf-8");
-                exit($words->getError());
+                exit($works->getError());
             }
 
             $data['uuid']= $this->create_guid();//uuid赋值
 
             //插入数据库
-            if ($id = $words->add($data)) {
+            if ($id = $works->add($data)) {
                 $this->success('发布成功', U('index/index'), 2);
             } else {
                 $this->error('发布失败');

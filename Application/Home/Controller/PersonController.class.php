@@ -11,8 +11,9 @@
         }
         // 获取当前用户的用户信息
         $userid=$_SESSION['userid'];
-        $info=M('user')->where(array('userid' => $userid))->select();
-        $this->assign('userinfo',$info);
+        $info=M('userinfo')->where(array('userid' => $userid))->find();
+        //var_dump($info);
+        $this->assign('userinfo',$info);// 模板变量赋值
         $this->display();
 	}
 	/**
@@ -40,21 +41,21 @@
 	    $upload = new \Think\Upload();// 实例化上传类
 	    $upload->maxSize   =     3145728 ;// 设置附件上传大小
 	    $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-	    $upload->rootPath  =     './Public/Uploads/'; // 设置附件上传根目录
+	    $upload->rootPath  =     './Public/Uploads/UserPic/'; // 设置附件上传根目录
 	    // $upload->savePath  =     ''; // 设置附件上传（子）目录
-	    $info   =   $upload->uploadOne($_FILES['logo']);
+	    $info   =   $upload->uploadOne($_FILES['photo']);
 	    // 上传文件 
-	    $info   =   $upload->upload();
 	    if(!$info) {// 上传错误提示错误信息
-	    	
 	        $this->error($upload->getError());
 	    }else{// 上传成功
 	        $this->success('上传成功！');
-	        $data['logo']=$info['savepath'].$info['savename'];
+	        //$data['logo']=$info['savepath'].$info['savename'];
 	    	//1 转换array to json
-	    	$obj=json_encode($info);
+	    	//$obj=json_encode($info);
+	    	$userid = $_SESSION['userid'];
+	    	D("userinfo")->where(array('userid' => $userid))->save(array('picture' => $info['savepath'].$info['savename']));
 	    	//2 使用json 拼接处 真实的图片上传地址
-	    	 $tempString = $obj->photo->savePath.$obj->photo->savaName;
+	    	 //$tempString = $obj->photo->savePath.$obj->photo->savaName;
 	    	 //var_dump($tempString);
 	    	//3 拿到地址 更新数据库
 	    	//$userinfo->where(array('userid' => $userid))->setField('picture',$tempString);

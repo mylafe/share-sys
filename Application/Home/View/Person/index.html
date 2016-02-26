@@ -58,6 +58,9 @@
   <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+      <li>
+      <img class="am-img-circle am-img-thumbnail" style="width:40px;height40px;" src="__PUBLIC__/uploads/userpic/{$userinfo.picture}" alt="头像"/>
+      </li>
       <li><a href="{:U('person/index')}" data-toggle="modal"><span id="login" class="am-icon-users" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">您好，{:session('username')}</span></a>
       </li>
       <li><a><span data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">上次登录时间:{:session('lasttime')}</span></a>
@@ -115,19 +118,19 @@
           <div class="am-panel-bd">
             <div class="am-g">
               <div class="am-u-md-4">
-                <img class="am-img-circle am-img-thumbnail" src="__PUBLIC__/img/toplogo.png" alt=""/>
+                <img class="am-img-circle am-img-thumbnail" src="__PUBLIC__/uploads/userpic/{$userinfo.picture}" alt="头像"/>
               </div>
               <div class="am-u-md-8">
                 <p>本地上传头像</p>
-                <form class="am-form">
+                <!-- <form class="am-form">
                   <div class="am-form-group">
                     <input type="file" id="user-pic">
                     <p class="am-form-help">请选择要上传的文件...</p>
                     <button type="button" class="am-btn am-btn-primary am-btn-xs">保存头像</button>
                   </div>
-                </form>
+                </form> -->
                 <form action="__URL__/doedit" enctype="multipart/form-data" method="post" >
-                    <input type="text" name="name" />
+                    <!-- <input type="text" name="name" /> -->
                     <input type="file" name="photo" />
                     <input type="submit" value="提交" >
                 </form>
@@ -139,13 +142,12 @@
 
       <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
 
-      <volist name="userinfo" id="vo">
 
         <form action="/home/person/personedit" method="post" class="am-form am-form-horizontal">
           <div class="am-form-group">
             <label for="user-name" class="am-u-sm-3 am-form-label">昵称</label>
             <div class="am-u-sm-9">
-              <input type="text" id="username" name="username" value="{$vo.username}">
+              <input type="text" id="username" name="username" value="{$userinfo.username}">
               <!-- <small>输入新昵称</small> -->
             </div>
           </div>
@@ -178,7 +180,6 @@
           </div>
         </form>
 
-        </volist>
         <!-- <ul id="side-menu" class="am-list admin-sidebar-list">
                 <volist name="userinfo" id="vo">
                     <li>
