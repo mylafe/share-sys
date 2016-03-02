@@ -15,14 +15,13 @@ class LoginController extends Controller {
             // 自动验证 创建数据集
             //$data['admin']= $_POST['admin'];
             
-
+            //防止乱码
             header("Content-type: text/html; charset=utf-8");
             // 组合查询条件
             $where = array();
             $where['admin'] =  $_POST['admin'];
             $res = $login->where($where)->field('admin,password')->find();
-            var_dump($res);
-            var_dump(sha1($_POST['password']));
+            //var_dump($res);
 
             // 验证用户名 对比 密码
            if ($res && $res['password'] == sha1($_POST['password'])) {
@@ -33,7 +32,7 @@ class LoginController extends Controller {
 
                  //$login->where("userid = {$res['userid']}")->setField('lasttime',date("Y-m-d H:i:s" ,time()));//更新最后登录时间
             } else {
-                 //$this->error('登录失败,用户名或密码不正确!');
+                 $this->error('登录失败,用户名或密码不正确!');
             }
         } else {
             $this->display();
@@ -47,7 +46,7 @@ class LoginController extends Controller {
     {
         // 清除所有session
         session(null);
-        redirect(U('admin/index'), 2, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">^O^ <br>正在安全退出</h1>');
+        redirect(U('login/index'), 2, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">^O^ <br>正在安全退出</h1>');
     }
 
 }
