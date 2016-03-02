@@ -10,34 +10,30 @@ class LoginController extends Controller {
         // 判断提交方式
         if (IS_POST) {
             // 实例化Login对象
-            $login = M('admin');
+            $login = D('admin');
 
             // 自动验证 创建数据集
-            $data['admin']= $_POST['admin'];
-            $data['password']= sha1($_POST['password']);
+            //$data['admin']= $_POST['admin'];
             
 
-            if (!$data = $login->create()) {
-                // 防止输出中文乱码
-                header("Content-type: text/html; charset=utf-8");
-                exit($login->getError());
-            }
-
+            header("Content-type: text/html; charset=utf-8");
             // 组合查询条件
             $where = array();
-            $where['admin'] = $data['admin'];
+            $where['admin'] =  $_POST['admin'];
             $res = $login->where($where)->field('admin,password')->find();
+            var_dump($res);
+            var_dump(sha1($_POST['password']));
 
             // 验证用户名 对比 密码
-           if ($res && $res['password'] == $data['password']) {
+           if ($res && $res['password'] == sha1($_POST['password'])) {
                 //\Think\Log::record('uuuuuuuuuuuuuu'.$res['userid']."dddddddn".$res['username'],'ALERT');//调试
                 session('admin', $res['admin']);   // 当前用户名
 
-                $this->success('登录成功,正跳转至后台...', U('/'));
+                $this->success('登录成功,正跳转至后台...', U('index/index'));
 
                  //$login->where("userid = {$res['userid']}")->setField('lasttime',date("Y-m-d H:i:s" ,time()));//更新最后登录时间
             } else {
-                 $this->error('登录失败,用户名或密码不正确!');
+                 //$this->error('登录失败,用户名或密码不正确!');
             }
         } else {
             $this->display();
