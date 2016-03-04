@@ -19,10 +19,32 @@
 		// 判断提交方式 做不同处理
         if (IS_POST) {
             // 实例化User对象
-            $works = D('works');
+            $works = M('works');
+            //$data['picture']= $_POST['picture'];
+            
+            // $info=$this->uploadimg();
+            // $data['picture']=$info[0]['savename'];
             $data['title']= $_POST['title'];
             $data['contents']= $_POST['contents'];
+            $$data['userid'] = $_SESSION['userid'];
+
+            //var_dump($data);
             
+            $upload = new \Think\Upload();// 实例化上传类
+            $upload->maxSize   =     3145728 ;// 设置附件上传大小
+            $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+            $upload->rootPath  =     './Public/Uploads/Works/'; // 设置附件上传根目录
+            $info   =   $upload->uploadOne($_FILES['picture']);
+            // 上传文件 
+            if(!$info) {// 上传错误提示错误信息
+                $this->error($upload->getError());
+            }else{// 上传成功
+                $this->success('上传成功！');
+
+                $userid = $_SESSION['userid'];
+                D("works")->where(array('userid' => $userid))->save(array('picture' => $info['savepath'].$info['savename']));
+            }
+
 
             // 自动验证 创建数据集
             if (!$data = $works->create()) {
@@ -43,6 +65,30 @@
             $this->display();
         }
     }
+
+    // /**
+    // * 上传文章缩略图
+    // */
+    // public function doedit(){
+    //     $upload = new \Think\Upload();// 实例化上传类
+    //     $upload->maxSize   =     3145728 ;// 设置附件上传大小
+    //     $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+    //     $upload->rootPath  =     './Public/Uploads/UserPic/'; // 设置附件上传根目录
+    //     // $upload->savePath  =     ''; // 设置附件上传（子）目录
+    //     $info   =   $upload->uploadOne($_FILES['photo']);
+    //     // 上传文件 
+    //     if(!$info) {// 上传错误提示错误信息
+    //         $this->error($upload->getError());
+    //     }else{// 上传成功
+    //         $this->success('上传成功！');
+    //         //$data['logo']=$info['savepath'].$info['savename'];
+    //         //1 转换array to json
+    //         //$obj=json_encode($info);
+    //         $userid = $_SESSION['userid'];
+    //         D("userinfo")->where(array('userid' => $userid))->save(array('picture' => $info['savepath'].$info['savename']));
+    //     }
+    // }
+
     public function create_guid($namespace = '') {
     static $guid = '';
     $uid = uniqid("", true);
