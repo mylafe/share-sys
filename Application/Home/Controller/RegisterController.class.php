@@ -34,8 +34,9 @@ class RegisterController extends Controller {
             $data['uuid']= $this->create_guid();//uuid赋值
 
             //插入数据库
-            if ($id = $user->add($data)) {
+            if ($id = M('user')->add($data)) {
                 $this->success('注册成功', U('login/index'), 2);
+                M('userinfo')->add($data);//用户信息表
             } else {
                 $this->error('注册失败');
             }
