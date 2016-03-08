@@ -26,9 +26,11 @@
             // $data['picture']=$info[0]['savename'];
             $data['title']= $_POST['title'];
             $data['contents']= $_POST['contents'];
-            $$data['userid'] = $_SESSION['userid'];
+            $data['userid'] = $_SESSION['userid'];
 
-            //var_dump($data);
+            var_dump($data);
+            var_dump($_SESSION['userid']);
+
             $upload = new \Think\Upload();// 实例化上传类
             $upload->maxSize   =     3145728 ;// 设置附件上传大小
             $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
@@ -55,7 +57,7 @@
 
             //插入数据库
             if ($id = $works->add($data)) {
-                $this->success('发布成功', U('index/index'), 2);
+                //$this->success('发布成功', U('index/index'), 2);
             } else {
                 $this->error('发布失败');
             }
