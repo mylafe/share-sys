@@ -21,6 +21,7 @@
       background-color: #0E90D2;
       color: #fff;
     }
+    .ul{list-style:none;} 
 </style>
 <script type="text/javascript">
     function editClick(id,preTitle,preFenlei,preContent){
@@ -116,39 +117,19 @@
   <div class="admin-content">
     <div class="am-g">
       <div class="am-u-sm-12">
-        <form class="am-form">
-          <table class="am-table am-table-striped am-table-hover table-main">
-          <tbody>
 
-           <volist name="bookmarks" id="bo">
-                <tr>
-                    <td>{$bo.id}</td>
-                    <td>{$bo.title}</td>
-                    <td class="am-hide-sm-only"><a href="{$bo.contents}" target="_blank">{$bo.contents}</a></td>
-                    <td class="am-hide-sm-only">{$bo.time}</td>
-                    <td class="text-right mail-date">
-                        <div class="am-btn-toolbar">
-                            <div class="am-btn-group am-btn-group-xs">
-                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"><a href="javascript:editClick('{$bo.id}','{$bo.title}','{$bo.typeid}','{$bo.contents}')" title="编辑">编辑</a></span></button>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"><a onclick="return(confirm('确定要删除吗？'))" href="{:U('home/index/delete',array('id'=>$bo["id"]))}" title="删除">删除</a></span></button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </volist>
-          </tbody>
-        </table>
-        </form>
-        <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-thumbnails">
+        <volist name="typeArr" id="vo">
+        <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-1 am-thumbnails">
+          <li>
+           <li><a href="#"><img class="am-img-circle am-img-thumbnail" style="height:100%,weight:100%" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图"/><p>标题：{$vo.title}</p><p>作者：{$vo.userid}</p><p>摘要：{$vo.contents}</p></a></li>
+          </li>
+        </ul>
+        </volist>
+
+        <!-- 模板 -->
+        <!-- <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-thumbnails">
           <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-4.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-4.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-      </ul>
+      </ul> -->
       </div>
 
     </div>

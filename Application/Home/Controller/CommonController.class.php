@@ -21,19 +21,5 @@ class CommonController extends Controller {
             redirect(U('login/index'), 3, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">-_-!<br>对不起,您还没有登录,正跳转至登录面...</h1>');
         }
     }
-    //图片上传
-    // public function uploadimg(){
-    //     import('ORG.Net.UploadFile');
-    //     $upload = new UploadFile();// 实例化上传类
-    //     $upload->allowExts  = array('jpg','gif','png','jpeg','bmp');// 设置附件上传类型
-    //     $upload->savePath =  './Public/Uploads/Works/';// 设置附件上传目录
-        
-    //     if(!$upload->upload()) {
-    //         $this->error($upload->getErrorMsg());
-    //     }else{
-    //         $info =  $upload->getUploadFileInfo();
-    //         return $info;
-    //     }
-    // }
-
+    
 } 

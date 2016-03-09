@@ -27,6 +27,7 @@
 			if (D("user")->where(array('userid' => $userid))->save(array('username' => $username)) !== false)
 			{
 				$this->success('修改成功！',U('/'),2);
+				M('userinfo')->where(array('userid' => $userid))->save(array('username' => $username));//用户信息表
 			} else {
 				$this->error('修改失败！',U('person/index'),3);
 			}
