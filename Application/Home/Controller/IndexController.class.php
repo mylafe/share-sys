@@ -14,6 +14,9 @@ class IndexController extends CommonController {
         //var_dump($arr);
         $this->assign('typeArr',$arr);// 模板变量赋值
 
+        //$data['title']= $this->msubstr();
+
         $this->display();
     }
+
 }

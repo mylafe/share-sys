@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="作品展示,个人分享"/>
+<meta name="description" content="个人文章博客分享" />
+<title></title>
+<link rel="icon" type="image/png" href="__PUBLIC__/img/toplogo.png"/>
+<link href="__PUBLIC__/css/amazeui.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/admin.css" rel="stylesheet">   
+<script src="__PUBLIC__/js/jquery-2.1.1.js"></script>
+<script src="__PUBLIC__/js/amazeui.min.js"></script>
+</head>
+<style type="text/css">
+    .btn-primary {
+        background-color: #286090;
+        border-color: #286090;
+    }
+    .admin-header{
+      background-color: #0E90D2;
+      color: #fff;
+    }
+    .ul{list-style:none;} 
+</style>
+<script type="text/javascript">
+    function editClick(id,preTitle,preFenlei,preContent){
+        $("#tempId").val(id);
+        $("#editqianfen").val(preFenlei);
+        $("#edittitle").val(preTitle);
+        $("#editcontents").val(preContent);
+        $('#doc-modal-3').modal('open');
+    }
+</script>
+<body class="gray-bg">
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>以获得更好的体验！</p>
+<![endif]-->
+<header class="am-topbar admin-header">
+  <div class="am-topbar-brand">
+    <strong>作品分享</strong>
+  </div>
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+      <!-- <li>
+      <a href="{:U('person/index')}">
+      <img class="am-img-circle am-img-thumbnail" style="width:40px;height40px;" src="__PUBLIC__/uploads/userpic/{$userinfo.picture}" alt="头像"/></a>
+      </li> -->
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">您好，{:session('username')}<span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li><a href="{:U('person/index')}"><span class="am-icon-user"></span> 个人资料</a></li>
+          <li><a href="{:U('Login/logout')}"><span class="am-icon-power-off"></span> 退出系统</a></li>
+        </ul>
+      </li>
+      <li><a><span data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">上次登录时间:{:session('lasttime')}</span></a>
+      </li>         
+      <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+    </ul>
+  </div>
+</header>
+
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="am-offcanvas-bar admin-offcanvas-bar">
+      <ul id="side-menu" class="am-list admin-sidebar-list">
+          <li><a href="{:U('index/index')}"><span class="am-icon-home"></span>首页</a></li>
+          <li><a href="{:U('article/index')}"><i><spand class="am-icon-file">发表文章</spand></i></a>
+          </li>
+          <li><a href="#" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">我的文章</spand></i></a>
+          </li>
+          <li><a href="{:U('Login/logout')}"><i><span class="am-icon-sign-out" data-am-modal="{'#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">退出系统</span></i></a>
+          </li>
+      </ul>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p><span class="am-icon-bookmark"></span> 公告</p>
+          <p>“我所认为最深沉的爱，莫过于分开以后，我将自己，活成了你的樣子”。——写给所有热爱互联网和相信爱情的人。</p>
+        </div>
+      </div>
+
+      <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+          <p><span class="am-icon-tag"></span> wiki</p>
+          <p>Welcome to the Amaze UI wiki!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="am-cf admin-main">
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-g">
+      <div class="am-u-sm-12">
+
+        <volist name="typeArr" id="vo">
+        <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-1 am-thumbnails">
+          <li>
+           <li><a href="{:U('details/index',array('uuid'=>$vo["uuid"]))}" target="_blank"><img class="am-img-circle am-img-thumbnail" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图" width="100%"><p>标题：{$vo.title}</p><p>作者：{$vo.userid}</p><p>摘要：{$vo.contents|msubstr=3,200,'utf-8',true}</p></a></li>
+          </li>
+        </ul>
+        </volist>
+
+        <!-- 模板 -->
+        <!-- <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-thumbnails">
+          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /><p>213</p><h5>简介简介</h5></a></li>
+      </ul> -->
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+
+<footer>
+  <hr>
+  <p class="am-padding-left">© 2016 作品分享系统</p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="__PUBLIC__/js/jquery.min.js"></script>
+<script src="__PUBLIC__/js/amazeui.min.js"></script>
+<!--<![endif]-->
+<script src="__PUBLIC__/js/app.js"></script>
+
+
+</body>
+
+</html>

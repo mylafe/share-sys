@@ -72,7 +72,7 @@
           <li><a href="{:U('index/index')}"><span class="am-icon-home"></span>首页</a></li>
           <li><a href="{:U('article/index')}"><i><spand class="am-icon-file">发表文章</spand></i></a>
           </li>
-          <li><a href="#" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">技术讨论</spand></i></a>
+          <li><a href="{:U('myarticle/index')}" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">我的文章</spand></i></a>
           </li>
           <li><a href="{:U('Login/logout')}"><i><span class="am-icon-sign-out" data-am-modal="{'#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">退出系统</span></i></a>
           </li>
@@ -95,85 +95,156 @@
   </div>
 
 
-<div class="am-cf admin-main">
-  <!-- sidebar start -->
-  <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-    <div class="am-offcanvas-bar admin-offcanvas-bar">
-
-        <ul id="side-menu" class="am-list admin-sidebar-list">
-           
-            <volist name="typeArr2" id="vo">
-                <li>
-                  <a href="{:U('index/index',array('typeid'=>$vo["id"]))}"><i class="fa fa-tags"></i> <span class="am-icon-home">{$vo.name}</span></a>
-                </li>
-            </volist>
-        </ul>
-       
-    </div>
-  </div>
-  <!-- sidebar end -->
-
+<div class="admin-content">
   <!-- content start -->
+      
+      <!-- content start -->
   <div class="admin-content">
-    <div class="am-g">
-      <div class="am-u-sm-12">
 
-        <volist name="typeArr" id="vo">
-        <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-1 am-thumbnails">
-          <li>
-           <li><a href="#"><img class="am-img-circle am-img-thumbnail" style="height:100%,weight:100%" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图"/><p>标题：{$vo.title}</p><p>作者：{$vo.userid}</p><p>摘要：{$vo.contents}</p></a></li>
-          </li>
-        </ul>
-        </volist>
-
-        <!-- 模板 -->
-        <!-- <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-thumbnails">
-          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-      </ul> -->
-      </div>
-
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">相册</strong> / <small>Gallery</small></div>
     </div>
+
+    <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-margin gallery-list">
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt=""/>
+          <div class="gallery-title">远方 有一个地方 那里种有我们的梦想</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" alt=""/>
+          <div class="gallery-title">君可见漫天落霞</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-3.jpg" alt=""/>
+          <div class="gallery-title">此刻鲜花满天幸福在身边</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-4.jpg" alt=""/>
+          <div class="gallery-title">你当我是浮夸吧</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-4.jpg" alt=""/>
+          <div class="gallery-title">远方 有一个地方 那里种有我们的梦想</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt=""/>
+          <div class="gallery-title">斜阳染幽草 几度飞红</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt=""/>
+          <div class="gallery-title">远方 有一个地方 那里种有我们的梦想</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-3.jpg" alt=""/>
+          <div class="gallery-title">你当我是浮夸吧</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-3.jpg" alt=""/>
+          <div class="gallery-title">远方 有一个地方 那里种有我们的梦想</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" alt=""/>
+          <div class="gallery-title">君可见漫天落霞</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-3.jpg" alt=""/>
+          <div class="gallery-title">你当我是浮夸吧</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" alt=""/>
+          <div class="gallery-title">君可见漫天落霞</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img class="am-img-thumbnail am-img-bdrs" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt=""/>
+          <div class="gallery-title">斜阳染幽草 几度飞红</div>
+          <div class="gallery-desc">2375-09-26</div>
+        </a>
+      </li>
+    </ul>
+
+    <div class="am-margin am-cf">
+      <hr/>
+      <p class="am-fl">共 15 条记录</p>
+      <ol class="am-pagination am-fr">
+        <li class="am-disabled"><a href="#">&laquo;</a></li>
+        <li class="am-active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ol>
+    </div>
+
   </div>
   <!-- content end -->
-</div>
-        
-<!-- 添加书签 -->
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
-  <div class="am-modal-dialog">
-    <div class="am-modal-hd">技术讨论
-      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-    </div>
-    <div class="am-modal-bd">
-      <form action="/home/index/biaoqian" method="post">
-    <div class="form-group">
-                <input type="text" class="form-control" name="title" id="title" placeholder="标题" required="">
 
-                <label></label>
-                    <select id="qianfen" name="typeid">
-                      <!-- <option>=未分类=</option>
-                      <option value="1">学习</option>
-                      <option value="2">阅读</option>
-                      <option value="3">管理</option>
-                      <option value="4">工具</option>
-                      <option value="5">娱乐</option>
-                      <option value="6">论坛</option> -->
-                    
-                    <option>=未分类=</option>
-                    <volist name="typeArr2" id="vo">
-                        <li>
-                            <option value="{$vo.id}">{$vo.name}</option>
-                        </li>
-                    </volist>
-                    </select>
-                <input type="text" class="form-control" name="contents" id="contents" placeholder="内容" required="">
-            </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">添加</button>
-            </div>
-    </form>
-    </div>
-  </div>
-</div>
 
+      <volist name="typeArr" id="vo">
+      <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-margin gallery-list">
+        <li>
+            <a href="{:U('details/index',array('uuid'=>$vo["uuid"]))}" target="_blank">
+            <img class="am-img-thumbnail am-img-bdrs" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图"/>
+            <div class="gallery-title">{$vo.title}</div>
+            <!-- <div class="gallery-contents">{$vo.contents|msubstr=3,50,'utf-8',true}</div>
+             --><div class="gallery-desc">{$vo.time}</div>
+          </a>
+        </li>
+      </ul>
+      </volist>
+
+    <div class="am-margin am-cf">
+      <hr/>
+      <p class="am-fl">共 15 条记录</p>
+      <ol class="am-pagination am-fr">
+        <li class="am-disabled"><a href="#">&laquo;</a></li>
+        <li class="am-active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ol>
+    </div>
+  <!-- content end -->
+</div>
 
 <!-- 编辑书签 -->
 <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-3">

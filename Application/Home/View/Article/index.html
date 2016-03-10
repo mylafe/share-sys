@@ -75,7 +75,7 @@
           <li><a href="{:U('index/index')}"><span class="am-icon-home"></span>首页</a></li>
           <li><a href="#" data-toggle="modal"><i><spand class="am-icon-file" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">发表文章</spand></i></a>
           </li>
-          <li><a href="#" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">技术讨论</spand></i></a>
+          <li><a href="{:U('myarticle/index')}" data-toggle="modal"><i><spand class="am-icon-table" data-am-modal="{target: '#doc-modal-2'}">我的文章</spand></i></a>
           </li>
           <!-- <li><a href="{:U('changepwd/index')}"><i><spand class="am-icon-pencil-square-o" data-am-modal="{closeViaDimmer: 0, width: 400, height: 225}">修改密码</spand></i></a>
           </li> -->
@@ -163,32 +163,6 @@
     $(function(){
         var um = UM.getEditor('myEditor');
     })
-</script>
-<script>
-    function change(s){
-        a=$(s).find("option:selected").attr("type");
-        if(a ==2){
-            $("#biaoqian").css("display","none");
-            $("#pingfen").css("display","none");
-            $("#mp3").css("display","block");
-            $("#pic2").css("display","none");
-        }else if(a==3){
-            $("#biaoqian").css("display","block");
-            $("#pingfen").css("display","block");
-            $("#mp3").css("display","none");
-            $("#pic2").css("display","none");
-        }else if(a==4){
-            $("#biaoqian").css("display","none");
-            $("#pingfen").css("display","none");
-            $("#mp3").css("display","none");
-            $("#pic2").css("display","none");
-        }else{
-            $("#biaoqian").css("display","none");
-            $("#pingfen").css("display","none");
-            $("#mp3").css("display","none");
-            $("#pic2").css("display","none");
-        }
-    }
 </script>
 </body>
 </html>
