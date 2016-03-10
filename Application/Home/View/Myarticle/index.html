@@ -100,21 +100,35 @@
     <div class="am-g">
       <div class="am-u-sm-12">
 
+        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-margin gallery-list">
         <volist name="typeArr" id="vo">
-        <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-1 am-thumbnails">
           <li>
-           <li><a href="{:U('details/index',array('uuid'=>$vo["uuid"]))}" target="_blank"><img class="am-img-circle am-img-thumbnail" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图" width="100%"><p>标题：{$vo.title}</p><p>作者：{$vo.userid}</p><p>摘要：{$vo.contents|msubstr=3,200,'utf-8',true}</p></a></li>
+              <a href="{:U('details/index',array('uuid'=>$vo["uuid"]))}" target="_blank">
+              <img class="am-img-thumbnail am-img-bdrs" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图" style="height:100px;width:150px;"/>
+              <div class="gallery-title">{$vo.title}</div>
+              <div class="gallery-title">作者:{$vo.userid}</div>
+              <div>{$vo.contents|msubstr=0,10,'utf-8',true}</div>
+              <div class="gallery-time">{$vo.time}</div>
+            </a>
           </li>
-        </ul>
         </volist>
-
-        <!-- 模板 -->
-        <!-- <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-thumbnails">
-          <li><a href="#"><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /><p>213</p><h5>简介简介</h5></a></li>
-      </ul> -->
+        </ul>
       </div>
 
     </div>
+    <div class="am-margin am-cf">
+    <hr/>
+    <p class="am-fl">我共发表{$count}篇文章</p>
+    <ol class="am-pagination am-fr">
+      <li class="am-disabled"><a href="#">&laquo;</a></li>
+      <li class="am-active"><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li><a href="#">&raquo;</a></li>
+    </ol>
+  </div>
   </div>
   <!-- content end -->
 </div>
