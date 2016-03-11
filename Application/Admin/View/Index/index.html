@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Amaze UI Admin table Examples</title>
+  <title>作品后台管理</title>
   <meta name="description" content="这是一个 table 页面">
   <meta name="keywords" content="作品分享">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,7 +100,7 @@
               </tr>
           </thead>
           <tbody>
-          <volist name="allArr" id="vo">
+          <volist name="allArr0" id="vo">
         <!-- <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-1 am-thumbnails">
           <li>
            <li><a href="{:U('details/index',array('uuid'=>$vo["uuid"]))}" target="_blank"><img class="am-img-circle am-img-thumbnail" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图" width="100%"><p>标题：{$vo.title}</p><p>作者：{$vo.userid}</p><p>摘要：{$vo.contents|msubstr=3,200,'utf-8',true}</p></a></li>
@@ -117,9 +117,9 @@
               <td>
                 <div class="am-btn-toolbar">
                   <div class="am-btn-group am-btn-group-xs">
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                    <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> <a onclick="return(confirm('确定审查通过？'))" href="{:U('admin/index/pass',array('uuid'=>$vo["uuid"]))}">通过</a></button>
+                    <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 未通过</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> <a onclick="return(confirm('确定删除数据？'))" href="{:U('admin/index/delete',array('uuid'=>$vo["uuid"]))}">删除</a></button>
                   </div>
                 </div>
               </td>
@@ -134,18 +134,12 @@
 <div class="am-cf">
   <div class="am-fr">
     <ul class="am-pagination">
-      <li class="am-disabled"><a href="#">«</a></li>
-      <li class="am-active"><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-      <li><a href="#">»</a></li>
+      <li>{$page}</li>
     </ul>
   </div>
 </div>
           <hr />
-          <p>注：.....</p>
+          <p>注：一共{$count}篇文章,有{$count0}篇未审核</p>
         </form>
       </div>
 
