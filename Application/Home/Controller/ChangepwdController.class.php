@@ -1,7 +1,7 @@
 <?php
 	namespace Home\Controller;
 	use Think\Controller;
-	class ChangepwdController extends Controller {
+	class ChangepwdController extends CommonController {
 	/**
 	* 修改密码
 	*/

@@ -1,21 +1,21 @@
 <?php
 	namespace Home\Controller;
 	use Think\Controller;
-	class PersonController extends Controller {
+	class PersonController extends CommonController {
 	/**
 	* 读取个人资料
 	*/
-	public function index() {
-        if($_SESSION['userid']==null || $_SESSION['userid']== ''){
-            $this->error("非法操作",U('Login/index'));
-        }
-        // 获取当前用户的用户信息
-        $userid=$_SESSION['userid'];
-        $info=M('userinfo')->where(array('userid' => $userid))->find();
-        //var_dump($info);
-        $this->assign('userinfo',$info);// 模板变量赋值
-        $this->display();
-	}
+	// public function index() {
+ //        if($_SESSION['userid']==null || $_SESSION['userid']== ''){
+ //            $this->error("非法操作",U('Login/index'));
+ //        }
+ //        // 获取当前用户的用户信息
+ //        $userid=$_SESSION['userid'];
+ //        $info=M('userinfo')->where(array('userid' => $userid))->find();
+ //        //var_dump($info);
+ //        $this->assign('userinfo',$info);// 模板变量赋值
+ //        $this->display();
+	// }
 	/**
 	* 修改个人资料
 	*/

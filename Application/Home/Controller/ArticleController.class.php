@@ -1,7 +1,7 @@
 <?php
 	namespace Home\Controller;
 	use Think\Controller;
-	class ArticleController extends Controller {
+	class ArticleController extends CommonController {
 	/**
 	* 读取个人资料
 	*/

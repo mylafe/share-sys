@@ -1,7 +1,7 @@
 <?php
 	namespace Home\Controller;
 	use Think\Controller;
-	class DetailsController extends Controller {
+	class DetailsController extends CommonController {
 	/**
 	* 读取文章详细信息
 	*/
