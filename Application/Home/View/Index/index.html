@@ -103,10 +103,11 @@
         <a href="{:U('details/index',array('uuid'=>$vo["uuid"]))}" target="_blank">
         <img class="am-img-thumbnail am-img-bdrs" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图" style="height:100px;width:150px;"/>
         <div class="gallery-title">{$vo.title}</div>
+        </a>
         <div class="gallery-title">作者:{$vo.userid}</div>
         <div>{$vo.contents|msubstr=0,10,'utf-8',true}</div>
         <div class="gallery-time">{$vo.time}</div>
-      </a>
+      
     </li>
   </volist>
   </ul>

@@ -50,6 +50,17 @@
     if (event.keyCode==13) //回车键的键值为13
     document.getElementById("login").click(); //调用登录按钮的登录事件
   }
+  // 验证码生成  
+var captcha_img = $('#captcha-container').find('img')  
+var verifyimg = captcha_img.attr("src");  
+captcha_img.attr('title', '点击刷新');  
+captcha_img.click(function(){  
+    if( verifyimg.indexOf('?')>0){  
+        $(this).attr("src", verifyimg+'&random='+Math.random());  
+    }else{  
+        $(this).attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());  
+    }  
+});  
 </script>
 
 </head>
@@ -69,6 +80,14 @@
           <label for="password">密码:</label>
           <input type="password" name="password" required="">
           <br>
+
+          <div class="control-group" id="captcha-container">
+            <div class="span4" style="margin-left: 0px;">
+              <input type="text" id="input_verify" name="verify"  placeholder="验证码" style="width:252px;">
+              <img width="30%" class="left15" height="50" alt="验证码" src="{:U('Admin/Login/verify_c',array())}" title="点击刷新">
+            </div>
+            
+          </div>
           <div class="sub">
           <input type="submit" name="login" id="login" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
           </div>
