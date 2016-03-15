@@ -17,6 +17,8 @@ class RbacController extends CommonController {
 
     //节点列表
     Public function node(){
+        $node = M('node')->order('sort')->select();
+        $this->assign('node',$node);
         $this->display();
     }
 
@@ -40,7 +42,32 @@ class RbacController extends CommonController {
 
     //添加节点
     Public function addNode(){
+        $this->$pid = I('pid', 0, 'intval'); //isset($_GET['pid']) ? $_GET['pid'] : 0;
+        $this->$level = I('level', 1, 'intval');
+
+        switch ($this->level){
+            case 1:
+                $this->type = '应用';
+                break;
+            
+            case 2:
+                $this->type = '控制器';
+                break;
+
+            case 3:
+                $this->type = '动作方法';
+                break;
+        }
+        //$this->assign('type',$this);// 模板变量赋值
         $this->display();
+    }
+    //添加节点表达处理
+    Public function addNodeHandle(){
+         if (M('node')->add($_POST)) {
+            $this->success('添加成功',U('Admin/Rbac/node'));
+        }else{
+            $this->error('添加失败');
+        }
     }
     
 

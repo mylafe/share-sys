@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>作品后台管理</title>
+  <title>RBAC管理</title>
   <meta name="description" content="这是一个 table 页面">
   <meta name="keywords" content="作品分享">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,11 +57,11 @@
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-user"></span>  RBAC<span class="am-icon-angle-right am-fr am-margin-right"></span></a>
           <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
             <li><a href="#" class="am-cf"><span class="am-icon-user"></span> 用户列表<span></span></a></li>
-            <li><a href="{:U('Rbac/role')}"><span class="am-icon-puzzle-piece"> 角色列表</span></a></li>
-            <li><a href="{:U('Rbac/node')}"><span class="am-icon-th"></span> 节点列表</a></li>
+            <li><a href="{:U('Admin/Rbac/role')}"><span class="am-icon-puzzle-piece"> 角色列表</span></a></li>
+            <li><a href="#"><span class="am-icon-th"></span> 节点列表</a></li>
             <li><a href="#"><span class="am-icon-check"></span> 添加用户</a></li>
-            <li><a href="{:U('Rbac/addRole')}"><span class="am-icon-check"></span> 添加角色</a></li>
-            <li><a href="{:U('Rbac/addNode')}"><span class="am-icon-check"></span> 添加节点</a></li>
+            <li><a href="{:U('Admin/Rbac/addRole')}"><span class="am-icon-check"></span> 添加角色</a></li>
+            <li><a href="#"><span class="am-icon-check"></span> 添加节点</a></li>
           </ul>
         </li>
         <li><a href="{:U('Login/logout')}"><span class="am-icon-sign-out"></span> 注销</a></li>
@@ -88,79 +88,45 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">文章</strong> / <small>审核</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">RBAC</strong> / <small>节点列表</small></div>
     </div>
 
-    <div class="am-g">
-      <div class="am-u-sm-12 am-u-md-3">
-        <div class="am-input-group am-input-group-sm">
-          <input type="text" class="am-form-field">
-          <span class="am-input-group-btn">
-            <button class="am-btn am-btn-default" type="button">搜索</button>
-          </span>
-        </div>
-      </div>
-    </div>
+      <div id="wrap">
+        <a href="{:U('Admin/Rbac/addNode')}">添加应用</a>
 
-    <div class="am-g">
-      <div class="am-u-sm-12">
-        <form class="am-form">
-          <table class="am-table am-table-striped am-table-hover table-main">
-            <thead>
-              <tr>
-                <th class="table-check"><input type="checkbox" /></th><th class="table-title">用户</th><th class="table-type">标题</th><th class="table-author am-hide-sm-only">内容</th><th class="table-date am-hide-sm-only">图片</th><th class="table-date am-hide-sm-only">发布时间</th><th class="table-set">操作</th>
-              </tr>
-          </thead>
-          <tbody>
-          <volist name="allArr0" id="vo">
-        <!-- <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-1 am-thumbnails">
-          <li>
-           <li><a href="{:U('details/index',array('uuid'=>$vo["uuid"]))}" target="_blank"><img class="am-img-circle am-img-thumbnail" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图" width="100%"><p>标题：{$vo.title}</p><p>作者：{$vo.userid}</p><p>摘要：{$vo.contents|msubstr=3,200,'utf-8',true}</p></a></li>
-          </li>
-        </ul> -->
-       
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>{$vo.userid}</td>
-              <td>{$vo.title}</td>
-              <td class="am-hide-sm-only">{$vo.contents|msubstr=0,25,'utf-8',true}</td>
-              <td class="am-hide-sm-only"><img class="am-img-circle am-img-thumbnail" src="__PUBLIC__/uploads/works/{$vo.picture}" alt="文章缩略图" height="100px" width="150px"></td>
-              <td class="am-hide-sm-only">{$vo.time}</td>
-              <td>
-                <div class="am-btn-toolbar">
-                  <div class="am-btn-group am-btn-group-xs">
-                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> <a onclick="return(confirm('确定审查通过？'))" href="{:U('admin/index/pass',array('uuid'=>$vo["uuid"]))}">通过</a></button>
-                    <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 未通过</button>
-                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> <a onclick="return(confirm('确定删除数据？'))" href="{:U('admin/index/delete',array('uuid'=>$vo["uuid"]))}">删除</a></button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            </volist>
+        <foreach name="node" item="app">
+          <div class="app">
+            <p>
+              <strong>{$app.title}</strong>
+              <a href="{:U('Admin/Rbac/addNode',array('pid'=>$app["id"],'level'=> 2))}">添加控制器</a>
+
+            </p>
           </div>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div class="am-cf">
-  <div class="am-fr">
-    <ul class="am-pagination">
-      <li>{$page}</li>
-    </ul>
-  </div>
-</div>
-          <hr />
-          <p>注：一共{$count}篇文章,有{$count0}篇未审核</p>
-        </form>
+          
+        </foreach>
       </div>
+      
+        <!-- <table class="am-table am-table-striped am-table-hover table-main">
+          <tr>
+            <th>ID</th>
+            <th>角色名称</th>
+            <th>角色描述</th>
+            <th>开启状态</th>
+            <th>操作</th>
+          </tr>
 
-    </div>
-  </div>
-  <!-- content end -->
-</div>
-
-<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+          <foreach name='role' item='v'>
+            <tr>
+              <td>{$v.id}</td>
+              <td>{$v.name}</td>
+              <td>{$v.remark}</td>
+              <td>
+                <if condition='$v["state"]'>开启<else/>关闭</if>
+              </td>
+              <td><a href="{:U('#',array('id'=>$v["id"]))}">配置权限</a></td>
+            </tr>
+          </foreach>
+        </table> -->
 
 <footer>
   <hr>
