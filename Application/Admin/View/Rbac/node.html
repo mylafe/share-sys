@@ -14,9 +14,12 @@
   <link href="__PUBLIC__/css/admin.css" rel="stylesheet">
   <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
   <link href="__PUBLIC__/css/style.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/node.css">
   
   <script src="__PUBLIC__/js/jquery-2.1.1.js"></script>
   <script src="__PUBLIC__/js/amazeui.min.js"></script>
+
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -92,42 +95,39 @@
     </div>
 
       <div id="wrap">
-        <a href="{:U('Admin/Rbac/addNode')}">添加应用</a>
+        <a href="{:U('Admin/Rbac/addNode')}" class="add-app">添加应用</a>
 
         <foreach name="node" item="app">
           <div class="app">
             <p>
               <strong>{$app.title}</strong>
-              <a href="{:U('Admin/Rbac/addNode',array('pid'=>$app["id"],'level'=> 2))}">添加控制器</a>
-
+              [<a href="{:U('Admin/Rbac/addNode',array('pid'=>$app["id"],'level'=> 2))}">添加控制器</a>]
+              [<a href="">修改</a>]
+              [<a href="">删除</a>]
             </p>
+
+            <foreach name='app.child' item='action'>
+              <dl>
+                <dt>
+                  <strong>{$action.title}</strong>
+                  [<a href="{:U('Admin/Rbac/addNode',array('pid'=>$action["id"],'level'=> 3))}">添加方法</a>]
+                  <!-- [<a href="">修改</a>]
+                  [<a href="">删除</a>] -->
+                </dt>
+                <foreach name='action.child' item='method'>
+                  <dd>
+                    <span>{$method.title}</span>
+                    [<a href="">修改</a>]
+                    [<a href="">删除</a>]
+                  </dd>
+                </foreach>
+              </dl>
+            </foreach>
           </div>
           
         </foreach>
       </div>
       
-        <!-- <table class="am-table am-table-striped am-table-hover table-main">
-          <tr>
-            <th>ID</th>
-            <th>角色名称</th>
-            <th>角色描述</th>
-            <th>开启状态</th>
-            <th>操作</th>
-          </tr>
-
-          <foreach name='role' item='v'>
-            <tr>
-              <td>{$v.id}</td>
-              <td>{$v.name}</td>
-              <td>{$v.remark}</td>
-              <td>
-                <if condition='$v["state"]'>开启<else/>关闭</if>
-              </td>
-              <td><a href="{:U('#',array('id'=>$v["id"]))}">配置权限</a></td>
-            </tr>
-          </foreach>
-        </table> -->
-
 <footer>
   <hr>
   <p class="am-padding-left">作品管理</p>

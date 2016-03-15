@@ -17,7 +17,10 @@ class RbacController extends CommonController {
 
     //节点列表
     Public function node(){
-        $node = M('node')->order('sort')->select();
+        $field = array('id', 'name', 'title', 'pid');
+        $node = M('node')->field($field)->order('sort')->select();
+        $node = node_merge($node);
+
         $this->assign('node',$node);
         $this->display();
     }
@@ -42,8 +45,8 @@ class RbacController extends CommonController {
 
     //添加节点
     Public function addNode(){
-        $this->$pid = I('pid', 0, 'intval'); //isset($_GET['pid']) ? $_GET['pid'] : 0;
-        $this->$level = I('level', 1, 'intval');
+        $this->pid = I('pid', 0, 'intval'); //isset($_GET['pid']) ? $_GET['pid'] : 0;
+        $this->level = I('level', 1, 'intval');
 
         switch ($this->level){
             case 1:
@@ -59,6 +62,7 @@ class RbacController extends CommonController {
                 break;
         }
         //$this->assign('type',$this);// 模板变量赋值
+        //var_dump($type);
         $this->display();
     }
     //添加节点表达处理
@@ -68,6 +72,14 @@ class RbacController extends CommonController {
         }else{
             $this->error('添加失败');
         }
+    }
+    //配置权限
+    Public function access(){
+        $rid = I ('rid',0,'intval');
+
+        $node = M('node')->order('sort')->select();
+        $this->node = node_merge($node);
+        $this->display();
     }
     
 

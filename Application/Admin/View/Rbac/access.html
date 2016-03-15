@@ -14,9 +14,34 @@
   <link href="__PUBLIC__/css/admin.css" rel="stylesheet">
   <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
   <link href="__PUBLIC__/css/style.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/node.css">
   
   <script src="__PUBLIC__/js/jquery-2.1.1.js"></script>
   <script src="__PUBLIC__/js/amazeui.min.js"></script>
+
+  <script type="text/javascript">
+
+      $(function() {
+
+        $('input[level=1]').click(function () {
+
+          var inputs = $(this).parents('.app').find('dl input');
+          $(this).prop('checked') ? inputs.prop('checked', 'checked') :
+              inputs.removeAttr('checked');
+
+        });
+
+        $('input[level=2]').click(function(){
+            var inputs = $(this).parents('dl').find('input');
+
+            $(this).prop('checked') ? inputs.prop('checked', 'checked') :
+              inputs.removeAttr('checked');
+        });
+      });
+
+  </script>
+
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -88,31 +113,36 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">RBAC</strong> / <small>角色列表</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">RBAC</strong> / <small>节点列表</small></div>
     </div>
+
+      <div id="wrap">
+        <a href="{:U('Admin/Rbac/role')}" class="add-app">返回</a>
+
+        <foreach name="node" item="app">
+          <div class="app">
+            <p>
+              <strong>{$app.title}</strong>
+              <input type="checkbox" name='access[]' value='{$app.id}_1' level='1'/>
+            <foreach name='app.child' item='action'>
+              <dl>
+                <dt>
+                  <strong>{$action.title}</strong>
+                  <input type="checkbox" name="access" value='{$action.id}_2' level='2'/>
+                </dt>
+                <foreach name='action.child' item='method'>
+                  <dd>
+                    <span>{$method.title}</span>
+                    <input type="checkbox" name="access" value='{$method.id}_3' level='3'/>
+                  </dd>
+                </foreach>
+              </dl>
+            </foreach>
+          </div>
+          
+        </foreach>
+      </div>
       
-        <table class="am-table am-table-striped am-table-hover table-main">
-          <tr>
-            <th>ID</th>
-            <th>角色名称</th>
-            <th>角色描述</th>
-            <th>开启状态</th>
-            <th>操作</th>
-          </tr>
-
-          <foreach name='role' item='v'>
-            <tr>
-              <td>{$v.id}</td>
-              <td>{$v.name}</td>
-              <td>{$v.remark}</td>
-              <td>
-                <if condition='$v["state"]'>开启<else/>关闭</if>
-              </td>
-              <td><a href="{:U('Admin/Rbac/access',array('rid'=>$v["id"]))}">配置权限</a></td>
-            </tr>
-          </foreach>
-        </table>
-
 <footer>
   <hr>
   <p class="am-padding-left">作品管理</p>
@@ -125,9 +155,6 @@
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="assets/js/jquery.min.js"></script>
-<!--<![endif]-->
-<script src="assets/js/amazeui.min.js"></script>
-<script src="assets/js/app.js"></script>
+
 </body>
 </html>
