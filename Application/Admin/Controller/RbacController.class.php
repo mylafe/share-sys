@@ -77,10 +77,47 @@ class RbacController extends CommonController {
     Public function access(){
         $rid = I ('rid',0,'intval');
 
-        $node = M('node')->order('sort')->select();
-        $this->node = node_merge($node);
+        $field = array('id','name','title','pid');
+        $node = M('node')->order('sort')->field($field)->select();
+        
+        //原有权限
+        $access = M('access')->where(array('role_id'=>$rid))->getField('node_id',ture);//读取一个字段
+
+        //var_dump($node);
+        var_dump($access);
+        
+        $this->node = node_merge($node, $access);
+
+        //var_dump($node);
+
+        $this->rid = $rid;
         $this->display();
     }
-    
+    //修改权限
+    Public function setAccess(){
+        $rid = I('rid', 0,'intval');
+        $db = M('access');
+        $db->where(array('role_id'=>$rid))->delete();//清空原权限
+
+        //组合新权限
+        $data = array();
+        foreach ($_POST['access'] as $v) {
+            $tmp = explode('_', $v);//把字符串$v以_分割为数组
+            //var_dump($v);
+            $data[] = array(
+                'role_id' => $rid,
+                'node_id' => $tmp[0],
+                'level' => $tmp[1]
+                );
+            //var_dump(json_encode($tmp[0]));
+        }
+
+        //插入新权限
+        if ($db->addAll($data)){
+            $this->success('修改成功',U('Admin/Rbac/role'));
+        }else{
+            $this->error('修改失败');
+        }
+    }
 
 }
