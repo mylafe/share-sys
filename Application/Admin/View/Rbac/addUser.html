@@ -12,36 +12,26 @@
 
   <link href="__PUBLIC__/css/amazeui.min.css" rel="stylesheet">
   <link href="__PUBLIC__/css/admin.css" rel="stylesheet">
-  <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
-  <link href="__PUBLIC__/css/style.css" rel="stylesheet">
-
-  <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/node.css">
   
   <script src="__PUBLIC__/js/jquery-2.1.1.js"></script>
   <script src="__PUBLIC__/js/amazeui.min.js"></script>
-
   <script type="text/javascript">
 
-      $(function() {
-
-        $('input[level=1]').click(function () {
-
-          var inputs = $(this).parents('.app').find('dl input');
-          $(this).prop('checked') ? inputs.prop('checked', 'checked') :
-              inputs.removeAttr('checked');
-
+      $(function(){
+        $(".add-role").click(function(){
+          // var obj = $(".add").clone();
+          var obj = $(this).parents('tr').clone();
+          obj.find('.add-role').remove();
+          $('#last').before(obj);
+          });
         });
-
-        $('input[level=2]').click(function(){
-            var inputs = $(this).parents('dl').find('input');
-
-            $(this).prop('checked') ? inputs.prop('checked', 'checked') :
-              inputs.removeAttr('checked');
-        });
-      });
 
   </script>
-
+  <style type="text/css">
+    .add-role{
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -113,41 +103,46 @@
   <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">RBAC</strong> / <small>配置权限</small></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">RBAC</strong> / <small>添加用户</small></div>
     </div>
-      
-      <form action="{:U('Admin/Rbac/setAccess')}" method="post">
-      <div id="wrap">
-        <a href="{:U('Admin/Rbac/role')}" class="add-app">返回</a>
+      <form class="am-form" action="{:U('admin/Rbac/addUserHandle')}" method="post">
+        <table class="am-table am-table-striped am-table-hover table-main">
+          <tr>
+            <th colspan="2">添加用户</th>
+          </tr>
+          <tr>
+            <td align="right">用户账户：</td>
+            <td>
+              <input type="text" name='username'>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">密码：</td>
+            <td>
+              <input type="password" name='password'>
+            </td>
+          </tr>
 
-        <foreach name="node" item="app">
-          <div class="app">
-            <p>
-              <strong>{$app.title}</strong>
-              <input type="checkbox" name='access[]' value='{$app.id}_1' level='1' <if condition='$app["access"]'>checked='checked'</if> />
-            <foreach name='app.child' item='action'>
-              <dl>
-                <dt>
-                  <strong>{$action.title}</strong>
-                  <input type="checkbox" name="access[]" value='{$action.id}_2' level='2'<if condition='$action["access"]'>checked='checked'</if>/>
-                </dt>
-                <foreach name='action.child' item='method'>
-                  <dd>
-                    <span>{$method.title}</span>
-                    <input type="checkbox" name="access[]" value='{$method.id}_3' level='3'<if condition='$method["access"]'>checked='checked'</if>/>
-                  </dd>
+          <tr>
+            <td align="right">所属角色：</td>
+            <td>
+              <select name="role_id[]">
+                <option value="">请选择角色</option>
+                <foreach name='role' item='v'>
+                  <option value="{$v['id']}">{$v.name}({$v.remark})</option>
                 </foreach>
-              </dl>
-            </foreach>
-          </div>
-          
-        </foreach>
-      </div>
-      
-      <input type="hidden" name="rid" value='{$rid}'/>
-      <input type="submit" value='保存修改' style='display:block;margin:20px auto;cursor:pointer'>
+              </select>
+              <span class="add-role">添加一个角色</span>
+            </td>
+          </tr>
+
+          <tr id='last'>
+            <td colspan="2" align="center">
+                <input type="submit" value='保存添加'>
+            </td>
+          </tr>
+        </table>
       </form>
-      
 <footer>
   <hr>
   <p class="am-padding-left">作品管理</p>
@@ -160,6 +155,9 @@
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-
+<script src="__PUBLIC__/assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="__PUBLIC__/assets/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/assets/js/app.js"></script>
 </body>
 </html>

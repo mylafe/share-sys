@@ -2,9 +2,36 @@
 namespace Admin\Controller;
 use Think\Controller;
 class RbacController extends CommonController {
+    //uuid
+    public function create_guid($namespace = '') {
+    static $guid = '';
+    $uid = uniqid("", true);
+    $data = $namespace;
+    $data .= $_SERVER['REQUEST_TIME'];
+    $data .= $_SERVER['HTTP_USER_AGENT'];
+    $data .= $_SERVER['LOCAL_ADDR'];
+    $data .= $_SERVER['LOCAL_PORT'];
+    $data .= $_SERVER['REMOTE_ADDR'];
+    $data .= $_SERVER['REMOTE_PORT'];
+    $hash = strtoupper(hash('ripemd128', $uid . $guid . md5($data)));
+    $guid = '{' .   
+            substr($hash,  0,  8) . 
+            '-' .
+            substr($hash,  8,  4) .
+            '-' .
+            substr($hash, 12,  4) .
+            '-' .
+            substr($hash, 16,  4) .
+            '-' .
+            substr($hash, 20, 12) .
+            '}';
+    return $guid;
+  }
 
     //用户列表
     Public function index(){
+        $result = D('UserRelation')->relation(true)->select();
+        print_r($result);
         $this->display();
     }
 
@@ -27,11 +54,47 @@ class RbacController extends CommonController {
 
     //添加用户
     Public function addUser(){
+        $this->role = M('role')->select();
         $this->display();
+    }
+    //添加用户表单处理
+    Public function addUserHandle(){
+        //用户信息
+        //print_r($_POST);
+        
+        $data['uuid']= $this->create_guid();//uuid赋值
+
+        $user = array(
+
+            'uuid' =>$data['uuid'],//uuid赋值
+            'userid' =>I('username'),
+            'username' => I('username'),
+            'password' =>I('password','','sha1'),
+            'lasttime' =>date("Y-m-d H:i:s" ,time()),
+            'loginip' =>get_client_ip()
+            );
+        //所属角色
+        $role = array();
+        if ($uid = M('user')->add($user)){
+            foreach ($_POST['role_id'] as $v) {
+                $role[] = array(
+                    'role_id'=>$v,
+                    'user_id'=>$data['uuid'],
+                    );
+            }
+            //var_dump($uuid);
+            //添加用户角色
+            M('role_user')->addAll($role);
+
+            $this->success('添加成功', U('Admin/Rbac/index'));
+        }else{
+            $this->error('添加失败');
+        }
     }
 
     //添加角色
     Public function addRole(){
+
         $this->display();
     }
     //添加角色处理
@@ -81,11 +144,11 @@ class RbacController extends CommonController {
         $node = M('node')->order('sort')->field($field)->select();
         
         //原有权限
-        $access = M('access')->where(array('role_id'=>$rid))->getField('node_id',ture);//读取一个字段
+        $access = M('access')->where(array('role_id'=>$rid))->getField('node_id', ture);//读取一个字段
 
         //var_dump($node);
-        var_dump($access);
-        
+        //var_dump($access);
+
         $this->node = node_merge($node, $access);
 
         //var_dump($node);
