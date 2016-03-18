@@ -36,7 +36,7 @@
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
       <li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-          <span class="am-icon-users">管理员，{:session('admin')}</span>
+          <span class="am-icon-users">管理员，{:session('username')}</span>
         </a>
       </li>
       <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
@@ -97,17 +97,29 @@
             <th>用户名称</th>
             <th>上一次登录时间</th>
             <th>上一次登录IP</th>
+            <th>锁定状态</th>
             <th>用户所属组别</th>
             <th>操作</th>
           </tr>
           <foreach name='user' item='v'>
           <tr>
-              <td>{$v.uuid}</td>
+              <td width="40px">{$v.uuid}</td>
               <td>{$v.username}</td>
               <td>{$v.lasttime}</td>
               <td>{$v.loginip}</td>
-              <td>1</td>
-              <td>1</td>
+              <td>
+                <if condition='$v["lock"]'>锁定<else/>未锁定</if>
+              </td>
+              <td>
+                  <ul>
+                      <foreach name='v.role' item='value'>
+                          <li>{$value.name}({$value.remark})</li>
+                      </foreach>
+                  </ul>
+              </td>
+              <td>
+                <a href="{:U('#',array('id'=>$v["uuid"]))}">锁定</a>
+              </td>
           </tr>
           </foreach>
         </table>

@@ -30,8 +30,9 @@ class RbacController extends CommonController {
 
     //用户列表
     Public function index(){
-        $this->user = D('UserRelation')->field('password',ture)->select();
-        //print_r($result);
+        $this->user = D('UserRelation')->field('password',ture)->relation(true)->select();//查询除去password字段
+        //$result = D('UserRelation')->relation(true)->select();
+        print_r($this);
         $this->display();
     }
 
@@ -144,9 +145,10 @@ class RbacController extends CommonController {
         $node = M('node')->order('sort')->field($field)->select();
         
         //原有权限
-        $access = M('access')->where(array('role_id'=>$rid))->getField('node_id', ture);//读取一个字段
+        $access = M('access')->where(array('role_id'=>$rid))->getField('node_id', true);//读取一个字段,加true
 
         //var_dump($node);
+        //print_r($access);
         //var_dump($access);
 
         $this->node = node_merge($node, $access);
