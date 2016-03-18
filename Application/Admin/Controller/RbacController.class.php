@@ -30,8 +30,8 @@ class RbacController extends CommonController {
 
     //用户列表
     Public function index(){
-        $result = D('UserRelation')->relation(true)->select();
-        print_r($result);
+        $this->user = D('UserRelation')->field('password',ture)->select();
+        //print_r($result);
         $this->display();
     }
 

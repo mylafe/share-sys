@@ -57,7 +57,7 @@
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-user"></span>  RBAC<span class="am-icon-angle-right am-fr am-margin-right"></span></a>
           <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
             <li><a href="{:U('Rbac/index')}"><span class="am-icon-user"></span> 用户列表<span></span></a></li>
-            <li><a href="{:U('Rbac/role')}"><span class="am-icon-puzzle-piece"> 角色列表</span></a></li>
+            <li><a href="{:U('Rbac/role')}"><span class="am-icon-puzzle-piece"></span>角色列表</a></li>
             <li><a href="{:U('Rbac/node')}"><span class="am-icon-th"></span> 节点列表</a></li>
             <li><a href="{:U('Rbac/addUser')}"><span class="am-icon-check"></span> 添加用户</a></li>
             <li><a href="{:U('Rbac/addRole')}"><span class="am-icon-check"></span> 添加角色</a></li>
@@ -100,7 +100,16 @@
             <th>用户所属组别</th>
             <th>操作</th>
           </tr>
-
+          <foreach name='user' item='v'>
+          <tr>
+              <td>{$v.uuid}</td>
+              <td>{$v.username}</td>
+              <td>{$v.lasttime}</td>
+              <td>{$v.loginip}</td>
+              <td>1</td>
+              <td>1</td>
+          </tr>
+          </foreach>
         </table>
       </form>
 <footer>
