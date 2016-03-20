@@ -12,8 +12,6 @@
 
   <link href="__PUBLIC__/css/amazeui.min.css" rel="stylesheet">
   <link href="__PUBLIC__/css/admin.css" rel="stylesheet">
-  <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
-  <link href="__PUBLIC__/css/style.css" rel="stylesheet">
   
   <script src="__PUBLIC__/js/jquery-2.1.1.js"></script>
   <script src="__PUBLIC__/js/amazeui.min.js"></script>
@@ -103,7 +101,7 @@
           </tr>
           <foreach name='user' item='v'>
           <tr>
-              <td width="40px">{$v.uuid}</td>
+              <td width="1px">{$v.uuid}</td>
               <td>{$v.username}</td>
               <td>{$v.lasttime}</td>
               <td>{$v.loginip}</td>
@@ -111,11 +109,15 @@
                 <if condition='$v["lock"]'>锁定<else/>未锁定</if>
               </td>
               <td>
+                  <if condition='$v["username"] eq C("RBAC_SUPERADMIN")'>
+                      超级管理员
+                  <else/>
                   <ul>
                       <foreach name='v.role' item='value'>
                           <li>{$value.name}({$value.remark})</li>
                       </foreach>
                   </ul>
+                  </if>
               </td>
               <td>
                 <a href="{:U('#',array('id'=>$v["uuid"]))}">锁定</a>
@@ -135,10 +137,5 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="assets/js/jquery.min.js"></script>
-<!--<![endif]-->
-<script src="assets/js/amazeui.min.js"></script>
-<script src="assets/js/app.js"></script>
 </body>
 </html>

@@ -31,6 +31,19 @@ class LoginController extends Controller {
         session('lasttime',date('Y-m-d H:i:s', $user['lasttime']));
         session('loginip',$user['loginip']);
 
+
+        //超级管理员识别
+        if($user['username']==C('RBAC_SUPERADMIN')){
+            session(C('ADMIN_AUTH_KEY'),true);
+        }
+        //读取用户权限
+        //import('Org.Util.Rbac');
+        // $Rbac = new \Org\Util\Rbac();
+        // $Rbac::saveAccessList();
+        //print_r($_SESSION);
+
+        
+
         $this->redirect('Admin/Index/index');
 
     }
@@ -56,8 +69,12 @@ class LoginController extends Controller {
     public function logout()
     {
         // 清除所有session
-        session(null);
-        redirect(U('login/index'), 2, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">^O^ <br>正在安全退出</h1>');
+        // session(null);
+        // redirect(U('login/index'), 2, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">^O^ <br>正在安全退出</h1>');
+        
+        session_unset();
+        session_destroy();
+        $this->redirect('Admin/Login/index');
     }
 
 }

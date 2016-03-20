@@ -10,7 +10,9 @@ Class UserRelationModel extends RelationModel{
     Protected $tableName = 'user';
 
     //定义关联关系
+    //SELECT*FROM think_user u left join think_role_user ru on u.uuid=ru.user_id left join think_role r on ru.role_id=r.id;
     Protected $_link = array(
+        //关联表名称
         'role'=>array(
             'mapping_type'=>MANY_TO_MANY,//多对多关系
             'foreign_key'=>'user_id',//主表在中间表中的字段

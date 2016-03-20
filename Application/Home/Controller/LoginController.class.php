@@ -41,6 +41,8 @@ class LoginController extends Controller {
                 session('username', $res['username']);   // 当前用户名
                 session('lasttime', $res['lasttime']);   // 最后登录时间
 
+                //print_r($data);
+
                 $this->success('登录成功,正跳转至系统首页...', U('/'));
 
                  $login->where("userid = {$res['userid']}")->setField('lasttime',date("Y-m-d H:i:s" ,time()));//更新最后登录时间
