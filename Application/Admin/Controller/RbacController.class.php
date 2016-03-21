@@ -30,7 +30,7 @@ class RbacController extends CommonController {
 
     //用户列表
     Public function index(){
-        $this->user = D('UserRelation')->field('password',ture)->relation(true)->select();//查询除去password字段
+        $this->user = D('UserRelation')->field('password',ture)->relation('role')->select();//查询除去password字段
         //$result = D('UserRelation')->relation(true)->select();
         print_r($this);
         $this->display();

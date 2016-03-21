@@ -50,17 +50,6 @@
     if (event.keyCode==13) //回车键的键值为13
     document.getElementById("login").click(); //调用登录按钮的登录事件
   }
-  // 验证码生成  
-var captcha_img = $('#captcha-container').find('img')  
-var verifyimg = captcha_img.attr("src");  
-captcha_img.attr('title', '点击刷新');  
-captcha_img.click(function(){  
-    if( verifyimg.indexOf('?')>0){  
-        $(this).attr("src", verifyimg+'&random='+Math.random());  
-    }else{  
-        $(this).attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());  
-    }  
-});  
 </script>
 
 </head>

@@ -25,10 +25,10 @@ class CommonController extends Controller {
     // $notAuth = in_array(MODULE_NAME, explode(',',C('NOT_AUTH_MODULE'))) ||
     //     in_array(ACTION_NAME,explode(',',C('NOT_AUTH_ACTION')));
 
-    // // if(C('USER_AUTH_ON') && !$notAuth){
-    // //     $Rbac = new \Org\Util\Rbac();
-    // //     $Rbac::AccessDecision(GROUP_NAME) || $this->error('没有权限');
+    // if(C('USER_AUTH_ON') && !$notAuth){
+    //     $Rbac = new \Org\Util\Rbac();
+    //     $Rbac::AccessDecision(GROUP_NAME) || $this->error('没有权限');
 
-    // }
+    //}
     
 } 

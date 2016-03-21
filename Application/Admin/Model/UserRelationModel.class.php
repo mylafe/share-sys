@@ -14,7 +14,7 @@ Class UserRelationModel extends RelationModel{
     Protected $_link = array(
         //关联表名称
         'role'=>array(
-            'mapping_type'=>MANY_TO_MANY,//多对多关系
+            'mapping_type' => self::MANY_TO_MANY,
             'foreign_key'=>'user_id',//主表在中间表中的字段
             'relation_key'=>'role_id',//副表在中间表中的字段
             'relation_table'=>'think_role_user',//中间表名称
