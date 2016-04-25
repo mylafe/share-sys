@@ -13,12 +13,13 @@ class CommonController extends Controller {
      */
     public function _initialize()
     {
+		header("Content-type: text/html; charset=utf-8");
         // 判断用户是否登录
         if (session('userid')) {
             $this->userid = session('userid');
         } else {
-            //$this->error('<h1 style="text-align:center; font-size: 50px; font-weight: normal;">-_-!</h1><br>对不起,您还没有登录,正跳转至登录面', U('login/index'));
-            redirect(U('login/index'), 3, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">-_-。。。<br>正在安全退出</h1>');
+            //$this->error('<h1 style="text-align:center; font-size: 50px; font-weight: normal;">-_-!</h1><br>', U('login/index'));
+            redirect(U('login/index'), 3, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">-_-。。。<br>对不起,您还没有登录,正跳转至登录面</h1>');
         }
     }
     

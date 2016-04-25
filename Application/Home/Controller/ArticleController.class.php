@@ -33,7 +33,7 @@
             $upload = new \Think\Upload();// 实例化上传类
             $upload->maxSize   =     3145728 ;// 设置附件上传大小
             $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-            $upload->rootPath  =     './Public/Uploads/Works/'; // 设置附件上传根目录
+            $upload->rootPath  =     './Public/uploads/works/'; // 设置附件上传根目录
             $info   =   $upload->uploadOne($_FILES['picture']);
             // 上传文件 
             if(!$info) {

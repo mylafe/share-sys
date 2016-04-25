@@ -59,6 +59,7 @@ class LoginController extends Controller {
      */
     public function logout()
     {
+		header("Content-type: text/html; charset=utf-8");
         // 清除所有session
         session(null);
         redirect(U('login/index'), 2, '<h1 style="text-align:center; font-size: 50px; font-weight: normal; margin-top: 120px;">^O^ <br>正在安全退出</h1>');
