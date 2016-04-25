@@ -40,13 +40,15 @@
   <div class="am-topbar-brand">
     <strong>作品分享</strong>
   </div>
-  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+
+
+  <?php
+        if ($_SESSION['userid']){
+    ?>
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-      <!-- <li>
-      <a href="{:U('person/index')}">
-      <img class="am-img-circle am-img-thumbnail" style="width:40px;height40px;" src="__PUBLIC__/uploads/userpic/{$userinfo.picture}" alt="头像"/></a>
-      </li> -->
       <li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
           <img class="am-img-circle am-img-thumbnail" style="width:40px;height40px;" src="__PUBLIC__/uploads/userpic/{$userinfo.picture}" alt="头像"/>您好，{:session('username')}<span class="am-icon-caret-down"></span>
@@ -61,6 +63,24 @@
       <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
     </ul>
   </div>
+    <?php
+        }else{
+    ?>
+      <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+        <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+          <li>
+            <a href="{:U('Login/index')}">登录</a>
+          </li>
+          <li>
+            <a href="{:U('register/index')}">注册</a>
+          </li>
+      </div>
+    <?php
+        }
+    ?>
+
+
+  
 </header>
 
 

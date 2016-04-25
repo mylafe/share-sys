@@ -6,7 +6,11 @@ class LoginController extends Controller {
      * 用户登录
      */
     public function login(){
-        if(!IS_POST) halt('页面不存在');
+        if(!IS_POST) E('页面不存在');
+
+        // print_r($_POST);
+        // var_dump($_POST);
+        // echo ($_POST);
 
         $userid = I('userid');
         $password = I('password','','sha1');
