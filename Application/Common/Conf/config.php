@@ -32,4 +32,10 @@ return array(
     'use_trans_sid'       =>  1,                               //跨页传递
     'use_only_cookies'    =>  0,                               //是否只开启基于cookies的session的会话方式
     ),
+    'QQ_AUTH'                 => array(
+	'APP_ID'         => '101332935', //你的QQ互联APPID
+	'APP_KEY'   => 'a5d98009bacbf58f1da88655634572db',
+	'SCOPE'          => 'get_user_info,get_repost_list,add_idol,add_t,del_t,add_pic_t,del_idol',
+	'CALLBACK'       => 'http://litao0501.com/qqlogin.php',
+	),
 );
